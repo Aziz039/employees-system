@@ -62,4 +62,62 @@ module.exports = {
 			}
 		});
 	},
+	get_all_user_customers: async (collecterName) => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sql.query(
+					"SELECT * FROM customersdata WHERE collecterName=?",
+					[collecterName],
+					(error, data) => {
+						return error
+							? reject({ code: 2000, message: error.code })
+							: resolve(
+									res.create(
+										data.length > 0
+											? `Collecter's customers fetched successfully`
+											: `Collector does not have customers`,
+										data.length > 0 ? data : null
+									)
+							  );
+					}
+				);
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
+	},
+	get_user_customer: async (content) => {
+		return new Promise((resolve, reject) => {
+			try {
+				console.log(content);
+				constants.sql.query(
+					"SELECT * FROM customersdata WHERE collecterName=? AND contractId=?",
+					[content.collecterName, content.contractId], 
+					(error, data) => {
+						return error
+							? reject({ code: 2000, message: error.code })
+							: resolve(
+									res.create(
+										data.length > 0
+											? `Collecter's customer fetched successfully`
+											: `Collector does not have a customer with this contact ID`,
+										data.length > 0 ? data : null
+									)
+							  );
+					}
+				);
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
+	},
+	modify_user_customer: async (content) => {
+	
+	},
+	add_user_customer: async (content) => {
+	
+	},
+	delete_user_customer: async (content) => {
+	
+	},
 };

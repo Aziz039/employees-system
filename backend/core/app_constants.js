@@ -49,8 +49,14 @@ module.exports = {
 		if (typeof bearerHeader !== "undefined") {
 			const bearer = bearerHeader.split(" "),
 				bearerToken = bearer[1];
-			request.token = bearerToken;
-			next();
+			request.user_token = bearerToken;
+			jwt.verify(request.user_token, request.headers["api_key"], async (token_error) => {
+				if (!token_error) {
+					next();
+				} else {
+					return response.json({ msg: "token failure" });
+				}
+			})
 		} else {
 			return response.json({ msg: "token failure" });
 		}
