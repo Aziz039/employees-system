@@ -3,9 +3,10 @@ const path = require("path"),
 	bcrypt = require("bcrypt"),
 	jwt = require("jsonwebtoken");
 
-require("dotenv").config({ path: path.resolve(process.cwd(), "local.env") });
+const dotenv = require("dotenv").config({ path: path.resolve(process.cwd(), "local.env") });
 
 module.exports = {
+	dotenv: dotenv,
 	express: require("express"),
 	mysql: require("mysql"),
 	jwt: require("jsonwebtoken"),
@@ -37,18 +38,10 @@ module.exports = {
 	sign_token: (username) => {
 		try {
 			let expireTime = Date.now() + 25200000; // expires in 7 hours
-			let tokenKey = jwt.sign({ username, expireTime }, 'shhhhh');
+			let tokenKey = jwt.sign({ username, expireTime }, process.env.api_key);
 			return tokenKey;
 		} catch (error) {
 			reject(error);
-		}
-		const userName = request;
-		const expireTime = Date.now() + 43200000; // expires in 12 hours
-		if (typeof userName !== "undefined") {
-			jwt.sign({ userName, expireTime }, 'shhhhh');
-			next();
-		} else {
-			return false;
 		}
 	},
 	verify_token: (request, response, next) => {
