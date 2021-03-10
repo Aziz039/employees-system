@@ -42,7 +42,7 @@ module.exports = {
 	modify_user_customer: async (request, response, next) => {
 		// modify one customer from a user by contractId
 		try {
-			response.body = await m.modify_user_customer(request.body.content);
+			response.body = await m.modify_user_customer(request.body);
 			response.status(200).send(response.body);
 			next();
 		} catch (error) {

@@ -6,7 +6,7 @@ router
 	.get("/user_customers/:collecterName", constants.verify_token, c.get_all_user_customers) 
 	.get("/user_customers/:collecterName/:contractId", constants.verify_token, c.get_user_customer)
 	.post("/user_customers", constants.verify_token, c.add_user_customer)
-	.put("/user_customers/:contractId", constants.verify_token, c.modify_user_customer)
+	.put("/user_customers", constants.verify_token, c.modify_user_customer)
 	.delete("/user_customers/:contractId", constants.verify_token, c.delete_user_customer)
 	;
 

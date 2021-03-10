@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const constants = require("../core/app_constants"),
 	res = require("../core/response");
 
@@ -89,7 +90,6 @@ module.exports = {
 	get_user_customer: async (content) => {
 		return new Promise((resolve, reject) => {
 			try {
-				console.log(content);
 				constants.sql.query(
 					"SELECT * FROM customersdata WHERE collecterName=? AND contractId=?",
 					[content.collecterName, content.contractId], 
@@ -111,8 +111,32 @@ module.exports = {
 			}
 		});
 	},
-	modify_user_customer: async (content) => {
-	
+	modify_user_customer: async (contents) => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sql.query(
+					"UPDATE customersdata SET ? WHERE contractId=?",
+					[ 
+						contents.contents, 
+						contents.contractId 
+					],
+					(error, data) => {
+						return error
+							? reject({ code: 2000, message: error.code })
+							: resolve(
+									res.create(
+										data.affectedRows > 0
+											? `Customer was modified successfully`
+											: `Customer could not be modified`,
+										data.affectedRows > 0 ? data : null
+									)
+							  );
+					}
+				);
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
 	},
 	add_user_customer: async (content) => {
 	
