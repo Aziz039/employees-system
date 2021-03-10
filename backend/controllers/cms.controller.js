@@ -3,18 +3,6 @@ const constants = require("../core/app_constants"),
 	res = require("../core/response");
 
 module.exports = {
-	auth_register: async (request, response, next) => {
-		// register a user
-		try {
-			response.body = await m.auth_register(request.body.content);
-			response.status(200).send(response.body);
-			next();
-		} catch (error) {
-			response.body = res.error(error);
-			response.status(500).send(response.body);
-			next();
-		}
-	},
 	get_all_user_customers: async (request, response, next) => {
 		// get all customers by username
 		try {

@@ -3,66 +3,6 @@ const constants = require("../core/app_constants"),
 	res = require("../core/response");
 
 module.exports = {
-	auth_register: async (content) => {
-		return new Promise((resolve, reject) => {
-			try {
-				// name - username - password - role - nationality - nationalID - branch - supervisor - userType 
-				if (!content.username || !content.password || !content.name || !content.role || 
-					!content.nationality || !content.nationalID || !content.branch || !content.supervisor 
-					|| !content.userType) {
-					return reject({ code: 400, message: "Request body invalid - missing fields" });
-				} else {
-					const passwordPromise = constants.hash(content.password);
-					const 	username = content.username,
-							name = content.name,
-							role = content.role,
-							nationality = content.nationality,
-							nationalID = content.nationalID,
-							branch = content.branch,
-							supervisor = content.supervisor,
-							userType = content.userType;
-					// Check if user exist
-					constants.sql.query(
-						"SELECT * FROM users WHERE username=?",
-						[username],
-						async (error, data) => {
-							if (data.length != 0) {
-								return reject({ code: 401, message: "Username exists" });
-							} else {
-								let password;
-								passwordPromise.then(res => {
-									password = res;
-								})
-								await passwordPromise;
-								constants.sql.query(
-									"INSERT INTO users (username, nationalID, name, role, password, nationality, supervisor, branch, userType)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-									[
-										username,
-										nationalID,
-										name,
-										role,
-										password,
-										nationality,
-										supervisor,
-										branch,
-										userType
-									],
-									(error, data) => {
-										return error
-											? reject({ code: 1005, message: error.code })
-											: resolve(
-													res.create("user added successfully", data.name)
-											  );
-									}
-								);
-							}
-					});
-				}
-			} catch (error) {
-				return reject({ code: 2001, message: error.code });
-			}
-		});
-	},
 	get_all_user_customers: async (collecterName) => {
 		return new Promise((resolve, reject) => {
 			try {
@@ -139,9 +79,61 @@ module.exports = {
 		});
 	},
 	add_user_customer: async (content) => {
-	
+		return new Promise((resolve, reject) => {
+			try {
+				console.log(content);
+				constants.sql.query(
+					"INSERT INTO customersdata (contractId, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterName, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					[
+						content.contractId, content.name , content.nationalID ,
+						content.cost , content.discount , content.costAfterDiscount,
+						content.lastBillDate, content.firstBillDate , content.phone1 ,
+						content.phone2 , content.phone3 , content.phone4,
+						content.phone5, content.phone6 , content.phone7 ,
+						content.phone8 , content.collecterName , content.attributionDate,
+						content.status, content.notes , content.paymentDate ,
+						content.newCondition , content.secondPaymentDate , content.secondNotes
+					],
+					(error, data) => {
+						return error
+							? reject({ code: 2000, message: error.code })
+							: resolve(
+								res.create(
+									data.affectedRows > 0
+										? `Customer added successfully`
+										: `Could not add customer`,
+									data.affectedRows > 0 ? data : null
+								)
+							);
+					}
+				);
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
 	},
 	delete_user_customer: async (content) => {
-	
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sql.query(
+					"DELETE FROM customersdata WHERE contractId=?",
+					[content.contractId],
+					(error, data) => {
+						return error
+							? reject({ code: 1007, message: error.code })
+							: resolve(
+									res.create(
+										data.affectedRows > 0
+											? "Customer deleted successfully"
+											: "Customer has already been deleted or does not exist",
+										null
+									)
+							  );
+					}
+				);
+			} catch (error) {
+				return reject({ code: 1008, message: "could not perform transaction" });
+			}
+		});
 	},
 };
