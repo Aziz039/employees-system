@@ -18,7 +18,9 @@ module.exports = {
 											? `Collecter's customers fetched successfully`
 											: `Collector does not have customers`,
 										data.length > 0 ? data : null
-									)
+									),
+									helper_updateCustomerCount(collecterName, data.length),
+									helper_updateUserCollectionMoney(collecterName)
 							  );
 					}
 				);
@@ -137,3 +139,133 @@ module.exports = {
 		});
 	},
 };
+
+
+const helper_updateCustomerCount = (username, countCustomers) => {
+	constants.sql.query(
+		"UPDATE users SET ? WHERE username=?",
+		[{"totalCustomersCount":countCustomers}, username],
+		(error, data) => {
+			error
+				? console.log("Error updating user's customer count")
+				: data.affectedRows > 0 ? 
+					console.log("customer count updated for ", username)
+					: console.log("No customers updated")
+		}
+	);
+	constants.sql.query(
+		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		[username, 'to do'],
+		(error, data) => {
+			error
+				? console.log(error)
+				: 	constants.sql.query(
+						"UPDATE users SET ? WHERE username=?",
+							[{"todoCustomers":data[0]['COUNT(*)']}, username],
+							(error, data) => {
+								error
+									? console.log("Error updating user's customer count")
+									: data.affectedRows > 0 ? 
+										console.log("customer to do count updated for ", username)
+										: console.log("No customers updated")
+							}
+					);	
+		}
+	);
+
+	constants.sql.query(
+		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		[username, 'in progress'],
+		(error, data) => {
+			error
+				? console.log(error)
+				: 	constants.sql.query(
+						"UPDATE users SET ? WHERE username=?",
+							[{"inProgressCustomers":data[0]['COUNT(*)']}, username],
+							(error, data) => {
+								error
+									? console.log("Error updating user's customer count")
+									: data.affectedRows > 0 ? 
+										console.log("customer in progress count updated for ", username)
+										: console.log("No customers updated")
+							}
+					);	
+		}
+	);
+
+	constants.sql.query(
+		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		[username, 'done'],
+		(error, data) => {
+			error
+				? console.log(error)
+				: 	constants.sql.query(
+						"UPDATE users SET ? WHERE username=?",
+							[{"doneCustomers":data[0]['COUNT(*)']}, username],
+							(error, data) => {
+								error
+									? console.log("Error updating user's customer count")
+									: data.affectedRows > 0 ? 
+										console.log("customer done count updated for ", username)
+										: console.log("No customers updated")
+							}
+					);	
+		}
+	);
+	
+}
+
+const helper_updateUserCollectionMoney = (username) => {
+	constants.sql.query(
+		"SELECT costAfterDiscount FROM customersdata WHERE collecterName=? AND  (customerStatus=? OR customerStatus=?)",
+		[username, 'to do', 'in progress'],
+		(error, data) => {
+			if (error){
+				console.log(error)
+			} else {
+				const result = Object.values(JSON.parse(JSON.stringify(data)));
+				let total = 0;
+				result.forEach((value) => {
+					total += value.costAfterDiscount;
+				});
+				constants.sql.query(
+					"UPDATE users SET ? WHERE username=?",
+						[{"pendingMoney":total}, username],
+						(error, data) => {
+							error
+								? console.log("Error updating user's pending money")
+								: data.affectedRows > 0 ? 
+									console.log("pending money updated for ", username)
+									: console.log("No pending money updated")
+						}
+				);
+			}
+		}
+	);
+	constants.sql.query(
+		"SELECT costAfterDiscount FROM customersdata WHERE collecterName=? AND  customerStatus=?",
+		[username, 'done'],
+		(error, data) => {
+			if (error){
+				console.log(error)
+			} else {
+				const result = Object.values(JSON.parse(JSON.stringify(data)));
+				let total = 0;
+				result.forEach((value) => {
+					total += value.costAfterDiscount;
+				});
+				constants.sql.query(
+					"UPDATE users SET ? WHERE username=?",
+						[{"collectedMoney":total}, username],
+						(error, data) => {
+							error
+								? console.log("Error updating user's collected money")
+								: data.affectedRows > 0 ? 
+									console.log("collected money updated for ", username)
+									: console.log("No collected money updated")
+						}
+				);
+			}
+		}
+	);
+}

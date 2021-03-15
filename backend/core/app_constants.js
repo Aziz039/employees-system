@@ -6,6 +6,7 @@ const path = require("path"),
 const dotenv = require("dotenv").config({ path: path.resolve(process.cwd(), "local.env") });
 
 module.exports = {
+	fs: require("fs"),
 	dotenv: dotenv,
 	express: require("express"),
 	mysql: require("mysql"),
