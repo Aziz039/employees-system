@@ -1,0 +1,17 @@
+{
+    "Header": {
+        "Header-Nav-Logo": "Alra2edoon",
+        "Header-Nav-Dashboard-Button": "Dashboard",
+        "Header-Nav-Language-Button": "Language",
+        "Header-Nav-Logout-Button": "Logout",
+        "Header-Nav-Login-Button": "Login"
+    },
+    "LoginPage": {
+        "Login-Card-Header": "Login",
+        "Login-Card-Username": "Enter your username",
+        "Login-Card-Password": "Enter a password",
+        "Login-missing-message": "Please enter:",
+        "Login-missing-username": "* Username",
+        "Login-missing-password": "* Password"
+    }
+}

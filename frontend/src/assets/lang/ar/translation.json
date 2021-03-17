@@ -1,0 +1,17 @@
+{
+    "Header": {
+        "Header-Nav-Logo": "الرائدون",
+        "Header-Nav-Dashboard-Button": "لوحة التحكم الرئيسية ",
+        "Header-Nav-Language-Button": "اللغة",
+        "Header-Nav-Logout-Button": "تسجيل الخروج",
+        "Header-Nav-Login-Button": "تسجيل الدخول"
+    },
+    "LoginPage": {
+        "Login-Card-Header": "تسجيل الدخول",
+        "Login-Card-Username": "اسم المستخدم",
+        "Login-Card-Password": "كلمة المرور",
+        "Login-missing-message": "الرجاء ادخال:",
+        "Login-missing-username": "* اسم المستخدم",
+        "Login-missing-password": "* كلمة المرور"
+    }
+}

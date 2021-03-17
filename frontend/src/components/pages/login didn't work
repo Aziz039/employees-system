@@ -1,0 +1,56 @@
+import React, { Component } from 'react';
+import i18n from '../../core/i18n';
+import LoginAvatar from "../../assets/images/logo.png"
+import "../../assets/styles/login.css"
+
+class Login extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+             
+        }
+    }
+    render() {
+        return (
+            <div class="description row">
+                <div class="element">
+                    <img src={LoginAvatar} id="logoImage" alt="User Icon" />
+                </div>
+                <form>
+                    <input class="form-control form-control-lg inputField" type="text" placeholder={i18n.t("LoginPage.Login-Card-Username")} id="inputLarge" />
+                    <input class="form-control form-control-lg inputField" type="text" placeholder={i18n.t("LoginPage.Login-Card-Password")} id="inputLarge" />
+                    <button type="button" class="btn btn-primary">{i18n.t("LoginPage.Login-Card-Header")}</button>
+                </form>
+            </div>
+        );
+    }
+}
+
+export default Login;
+
+// css
+.description {
+  background-color: #ecf0f1;
+  left: 50%;
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, -55%);
+  text-align: center;
+  width: 35%;
+  height: 55%;
+  border-radius: 25px;
+}
+
+#logoImage {
+  width:40%;
+  min-width: 150px;
+  margin-top: 40px;
+}
+
+.inputField {
+  margin: auto  !important;
+  text-align: center !important;
+  width: 60% !important;
+  min-width: 200px !important;
+  margin-bottom: 80px !important;
+}
