@@ -6,7 +6,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, timestamp FROM users",
+					`SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, timestamp FROM ${constants.dotenv.parsed.table_users}`,
 					(error, data) => {
 						return error
 							? reject({ code: 1000, message: error.code })
@@ -29,7 +29,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, timestamp FROM users WHERE username=?",
+					`SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, timestamp FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
 					[username],
 					(error, data) => {
 						return error
@@ -69,7 +69,7 @@ module.exports = {
 							userType = content.userType;
 					// Check if user exist
 					constants.sql.query(
-						"SELECT * FROM users WHERE username=?",
+						`SELECT * FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
 						[username],
 						async (error, data) => {
 							if (data.length != 0) {
@@ -81,7 +81,7 @@ module.exports = {
 								})
 								await passwordPromise;
 								constants.sql.query(
-									"INSERT INTO users (username, nationalID, name, role, password, nationality, supervisor, branch, userType)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+									`INSERT INTO ${constants.dotenv.parsed.table_users} (username, nationalID, name, role, password, nationality, supervisor, branch, userType)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 									[
 										username,
 										nationalID,
@@ -113,7 +113,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"UPDATE users SET ? WHERE username=?",
+					`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 					[content.content, content.username],
 					(error, data) => {
 						return error
@@ -137,7 +137,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"DELETE FROM users WHERE username=?",
+					`DELETE FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
 					[username],
 					(error, data) => {
 						return error
@@ -168,7 +168,7 @@ module.exports = {
 				await passwordPromise;
 				content.content.password = password;
 				constants.sql.query(
-					"UPDATE users SET ? WHERE username=?",
+					`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 					[content.content, content.username],
 					(error, data) => {
 						return error

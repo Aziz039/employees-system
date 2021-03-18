@@ -11,7 +11,7 @@ module.exports = {
 					const username = content.username;
                 	const password = content.password;
                     constants.sql.query(
-                        "SELECT * FROM users WHERE username=?",
+                        `SELECT * FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
                         [username],
                         async (error, data) => {
                             if (data.length == 0) {

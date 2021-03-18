@@ -6,7 +6,7 @@ module.exports = {
 	get_all_user_customers: async (request, response, next) => {
 		// get all customers by username
 		try {
-			response.body = await m.get_all_user_customers(request.params.collecterName);
+			response.body = await m.get_all_user_customers(request.params.collecterUsername);
 			response.status(200).send(response.body);
 			next();
 		} catch (error) {

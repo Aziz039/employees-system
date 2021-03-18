@@ -3,12 +3,12 @@ const constants = require("../core/app_constants"),
 	res = require("../core/response");
 
 module.exports = {
-	get_all_user_customers: async (collecterName) => {
+	get_all_user_customers: async (collecterUsername) => {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"SELECT * FROM customersdata WHERE collecterName=?",
-					[collecterName],
+					`SELECT * FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=?`,
+					[collecterUsername],
 					(error, data) => {
 						return error
 							? reject({ code: 2000, message: error.code })
@@ -19,8 +19,8 @@ module.exports = {
 											: `Collector does not have customers`,
 										data.length > 0 ? data : null
 									),
-									helper_updateCustomerCount(collecterName, data.length),
-									helper_updateUserCollectionMoney(collecterName)
+									helper_updateCustomerCount(collecterUsername, data.length),
+									helper_updateUserCollectionMoney(collecterUsername)
 							  );
 					}
 				);
@@ -33,8 +33,8 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"SELECT * FROM customersdata WHERE collecterName=? AND contractId=?",
-					[content.collecterName, content.contractId], 
+					`SELECT * FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND contractId=?`,
+					[content.collecterUsername, content.contractId], 
 					(error, data) => {
 						return error
 							? reject({ code: 2000, message: error.code })
@@ -57,7 +57,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"UPDATE customersdata SET ? WHERE contractId=?",
+					`UPDATE ${constants.dotenv.parsed.table_customers} SET ? WHERE contractId=?`,
 					[ 
 						contents.contents, 
 						contents.contractId 
@@ -85,14 +85,14 @@ module.exports = {
 			try {
 				console.log(content);
 				constants.sql.query(
-					"INSERT INTO customersdata (contractId, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterName, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					`INSERT INTO ${constants.dotenv.parsed.table_customers} (contractId, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterUsername, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 					[
 						content.contractId, content.name , content.nationalID ,
 						content.cost , content.discount , content.costAfterDiscount,
 						content.lastBillDate, content.firstBillDate , content.phone1 ,
 						content.phone2 , content.phone3 , content.phone4,
 						content.phone5, content.phone6 , content.phone7 ,
-						content.phone8 , content.collecterName , content.attributionDate,
+						content.phone8 , content.collecterUsername , content.attributionDate,
 						content.status, content.notes , content.paymentDate ,
 						content.newCondition , content.secondPaymentDate , content.secondNotes
 					],
@@ -118,7 +118,7 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					"DELETE FROM customersdata WHERE contractId=?",
+					`DELETE FROM ${constants.dotenv.parsed.table_customers} WHERE contractId=?`,
 					[content.contractId],
 					(error, data) => {
 						return error
@@ -143,7 +143,7 @@ module.exports = {
 
 const helper_updateCustomerCount = (username, countCustomers) => {
 	constants.sql.query(
-		"UPDATE users SET ? WHERE username=?",
+		`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 		[{"totalCustomersCount":countCustomers}, username],
 		(error, data) => {
 			error
@@ -154,13 +154,13 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 		}
 	);
 	constants.sql.query(
-		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		`SELECT COUNT(*) FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND customerStatus=?`,
 		[username, 'to do'],
 		(error, data) => {
 			error
 				? console.log(error)
 				: 	constants.sql.query(
-						"UPDATE users SET ? WHERE username=?",
+						`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 							[{"todoCustomers":data[0]['COUNT(*)']}, username],
 							(error, data) => {
 								error
@@ -174,13 +174,13 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 	);
 
 	constants.sql.query(
-		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		`SELECT COUNT(*) FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND customerStatus=?`,
 		[username, 'in progress'],
 		(error, data) => {
 			error
 				? console.log(error)
 				: 	constants.sql.query(
-						"UPDATE users SET ? WHERE username=?",
+						`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 							[{"inProgressCustomers":data[0]['COUNT(*)']}, username],
 							(error, data) => {
 								error
@@ -194,13 +194,13 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 	);
 
 	constants.sql.query(
-		"SELECT COUNT(*) FROM customersdata WHERE collecterName=? AND customerStatus=?",
+		`SELECT COUNT(*) FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND customerStatus=?`,
 		[username, 'done'],
 		(error, data) => {
 			error
 				? console.log(error)
 				: 	constants.sql.query(
-						"UPDATE users SET ? WHERE username=?",
+						`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 							[{"doneCustomers":data[0]['COUNT(*)']}, username],
 							(error, data) => {
 								error
@@ -217,7 +217,7 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 
 const helper_updateUserCollectionMoney = (username) => {
 	constants.sql.query(
-		"SELECT costAfterDiscount FROM customersdata WHERE collecterName=? AND  (customerStatus=? OR customerStatus=?)",
+		`SELECT costAfterDiscount FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND  (customerStatus=? OR customerStatus=?)`,
 		[username, 'to do', 'in progress'],
 		(error, data) => {
 			if (error){
@@ -229,7 +229,7 @@ const helper_updateUserCollectionMoney = (username) => {
 					total += value.costAfterDiscount;
 				});
 				constants.sql.query(
-					"UPDATE users SET ? WHERE username=?",
+					`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 						[{"pendingMoney":total}, username],
 						(error, data) => {
 							error
@@ -243,7 +243,7 @@ const helper_updateUserCollectionMoney = (username) => {
 		}
 	);
 	constants.sql.query(
-		"SELECT costAfterDiscount FROM customersdata WHERE collecterName=? AND  customerStatus=?",
+		`SELECT costAfterDiscount FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND  customerStatus=?`,
 		[username, 'done'],
 		(error, data) => {
 			if (error){
@@ -255,7 +255,7 @@ const helper_updateUserCollectionMoney = (username) => {
 					total += value.costAfterDiscount;
 				});
 				constants.sql.query(
-					"UPDATE users SET ? WHERE username=?",
+					`UPDATE ${constants.dotenv.parsed.table_users} SET ? WHERE username=?`,
 						[{"collectedMoney":total}, username],
 						(error, data) => {
 							error
