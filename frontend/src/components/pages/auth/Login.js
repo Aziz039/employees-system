@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import core from "../../core/app_constants"
-import LoginAvatar from "../../assets/images/logo.png"
-import "../../assets/styles/login.css"
-import i18n from "i18next"
-import Footer from '../shared/Footer.js';
+import axios from 'axios';
+import LoginAvatar from "../../../assets/images/logo.png";
+import  "../../../assets/styles/login.css";
+import i18n from "i18next";
+import Footer from '../../shared/Footer.js';
+
+import APP_CONSTANTS from "../../../core/app_constants";
+
+
 class login extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             formControls: {
 
             }
         }
+        console.log("const Dash ", sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.LANGUAGE));
     }
     handleChange = async (e) => {
         await this.setState({
@@ -22,11 +25,10 @@ class login extends Component {
                 ...this.state.formControls,
                 [e.target.name]: e.target.value
             }
-        })
+        });
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        let username = this.state.formControls.username;
         if (!this.state.formControls.username || !this.state.formControls.password) {
             let alerttt = `${i18n.t("LoginPage.Login-missing-message")} \n`;
             if (!this.state.formControls.username ) {
@@ -37,14 +39,15 @@ class login extends Component {
             alert(alerttt);
         }  else {
             e.preventDefault();
-            // await axios.post(core.APIs.auth.login, this.state.formControls).then(res => {
-            //     if (res) {
-            //         console.log(res);
-            //         localStorage.setItem(core.config.localStorage.token, res.data.token);
-            //         localStorage.setItem(core.config.localStorage.username, username);
-            //         window.location.href = "/EmployeeDashboard";
-            //     } 
-            // }).catch(error => {alert("Wrong credentials!");});
+            let content = this.state.formControls;
+            await axios.post(APP_CONSTANTS.CONFIG.APIs.AUTH.LOGIN, {content}).then(async res => {
+                if (res) {
+                    sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.USER, res.data.body.username);
+                    sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.TOKEN, res.data.body.token);
+                    sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged, true);
+                    window.location.href = "/EmployeeDashboard";
+                } 
+            }).catch(error => {alert("Wrong credentials!");});
         }
     }
     render() {

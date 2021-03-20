@@ -16,7 +16,7 @@ module.exports = {
 		}
 	},
 	get_user_customer: async (request, response, next) => {
-		// get one customer from a user by contractId
+		// get one customer from a user by id
 		try {
 			response.body = await m.get_user_customer(request.params);
 			response.status(200).send(response.body);
@@ -28,7 +28,7 @@ module.exports = {
 		}
 	},
 	modify_user_customer: async (request, response, next) => {
-		// modify one customer from a user by contractId
+		// modify one customer from a user by id
 		try {
 			response.body = await m.modify_user_customer(request.body);
 			response.status(200).send(response.body);

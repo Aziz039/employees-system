@@ -33,8 +33,8 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					`SELECT * FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND contractId=?`,
-					[content.collecterUsername, content.contractId], 
+					`SELECT * FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND id=?`,
+					[content.collecterUsername, content.id], 
 					(error, data) => {
 						return error
 							? reject({ code: 2000, message: error.code })
@@ -57,10 +57,10 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					`UPDATE ${constants.dotenv.parsed.table_customers} SET ? WHERE contractId=?`,
+					`UPDATE ${constants.dotenv.parsed.table_customers} SET ? WHERE id=?`,
 					[ 
 						contents.contents, 
-						contents.contractId 
+						contents.id 
 					],
 					(error, data) => {
 						return error
@@ -85,9 +85,9 @@ module.exports = {
 			try {
 				console.log(content);
 				constants.sql.query(
-					`INSERT INTO ${constants.dotenv.parsed.table_customers} (contractId, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterUsername, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+					`INSERT INTO ${constants.dotenv.parsed.table_customers} (id, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterUsername, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 					[
-						content.contractId, content.name , content.nationalID ,
+						content.id, content.name , content.nationalID ,
 						content.cost , content.discount , content.costAfterDiscount,
 						content.lastBillDate, content.firstBillDate , content.phone1 ,
 						content.phone2 , content.phone3 , content.phone4,
@@ -118,8 +118,8 @@ module.exports = {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					`DELETE FROM ${constants.dotenv.parsed.table_customers} WHERE contractId=?`,
-					[content.contractId],
+					`DELETE FROM ${constants.dotenv.parsed.table_customers} WHERE id=?`,
+					[content.id],
 					(error, data) => {
 						return error
 							? reject({ code: 1007, message: error.code })

@@ -11,7 +11,20 @@ const APP_CONSTANTS = {
 	APP_NAME: "Alra2edoon System",
 	CONFIG: {
 		API_KEY: {
-			WEB: "123",
+			WEB: "AbdulazizApiSecretKey",
+		},
+		APIs: {
+			AUTH: {
+				LOGIN: environmentURL + "auth/login"
+			},
+			CMS: {
+				GET_ALL_CUSTOMERS: environmentURL + "cms/user_customers",
+				GET_CUSTOMER: environmentURL + "cms/user_customers",
+			},
+			USERS:{
+				GET_ALL_USERS: environmentURL + "users",
+				GET_USER: environmentURL + "users",
+			}
 		},
 		CONTENT_TYPE: "application/json",
 		LANGUAGE: {
@@ -19,16 +32,12 @@ const APP_CONSTANTS = {
 			ENGLISH: "en",
 		},
 		sessionStorage: {
-			LANGUAGE: "en",
-			USER: "user",
-			TOKEN: "",
+			LANGUAGE: "LANGUAGE",
+			USER: "USER",
+			TOKEN: "TOKEN",
+			isLogged: "isLogged"
 		},
-	},
-	HTTP_REQUESTS: {
-		meta: {
-			main_page: environmentURL + "meta",
-		},
-	},
+	}, 
 };
 
 export const userToken = sessionStorage.getItem(

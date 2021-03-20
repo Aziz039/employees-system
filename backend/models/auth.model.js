@@ -4,6 +4,7 @@ const constants = require("../core/app_constants"),
 module.exports = {
 	auth_login: async (content) => {
 		return new Promise((resolve, reject) => {
+            console.log(content);
 			try {
                 if (!content.username || !content.password) {
                     return reject({ code: 400, message: "Request body invalid - username and password are required" });

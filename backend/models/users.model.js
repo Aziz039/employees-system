@@ -25,11 +25,12 @@ module.exports = {
 			}
 		});
 	},
+	// username, nationalID, name, role, password, nationality, supervisor, branch, userType, totalCustomersCount, todoCustomers, inProgressCustomers, doneCustomers, pendingMoney, collectedMoney, timestamp
 	get_user: async (username) => {
 		return new Promise((resolve, reject) => {
 			try {
 				constants.sql.query(
-					`SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, timestamp FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
+					`SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, totalCustomersCount, todoCustomers, inProgressCustomers, doneCustomers, pendingMoney, collectedMoney, timestamp FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
 					[username],
 					(error, data) => {
 						return error

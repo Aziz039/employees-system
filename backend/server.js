@@ -1,8 +1,10 @@
 const constants = require("./core/app_constants"),
 	express = require("express"),
 	app = express();
-	main_router = require("./routers/main.router");
+	main_router = require("./routers/main.router"),
+    cors = require('cors');
 
+    app.use(cors());
     app.use(
         express.json(),
         constants.bodyParser.json(),

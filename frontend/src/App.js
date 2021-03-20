@@ -3,9 +3,9 @@ import { Redirect } from 'react-router';
 import { withNamespaces } from 'react-i18next';
 
 import Header from './components/shared/Header.js';
-import Login from "./components/pages/Login";
-import Dashboard from "./components/pages/Dashboard";
-import CustomerDetails from "./components/pages/CustomerDetails";
+import Login from "./components/pages/auth/Login";
+import Dashboard from "./components/pages/EmployeeDashboard/Dashboard";
+import CustomerDetails from "./components/pages/CustomerDetails/CustomerDetails";
 
 function App({ t }) {
   return (

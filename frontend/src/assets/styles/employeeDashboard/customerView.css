@@ -1,0 +1,7 @@
+.th {
+    border-left:'solid 1px' !important;
+    border-bottom: 'solid 3px black' !important;
+    background-color: 'silver' !important;
+    color: black !important;
+    font-weight: 'bold';
+}

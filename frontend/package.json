@@ -11,12 +11,14 @@
     "bootswatch": "^4.6.0",
     "i18next": "^19.9.2",
     "jquery": "^3.6.0",
+    "multiselect-react-dropdown": "^1.6.11",
     "popper.js": "^1.16.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-i18next": "^9.0.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-table": "^7.6.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

@@ -11,9 +11,9 @@ class Footer extends Component {
         return (
             <div>
                 <footer id="footer">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p>Made by <a href="https://www.linkedin.com/in/abdulazizali/">Abdulaziz Alghamdi</a></p>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <p>Made by <a href="https://aziz039.github.io/">Abdulaziz Alghamdi</a></p>
                         </div>
                     </div>
                 </footer>
