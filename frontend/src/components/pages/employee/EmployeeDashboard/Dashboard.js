@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import i18n from '../../../core/i18n';
-import APP_CONSTANTS, {config} from "../../../core/app_constants";
+import i18n from '../../../../core/i18n';
+import APP_CONSTANTS, {config} from "../../../../core/app_constants";
 
 import UserView from './UserView';
 import CustomersView from './customersView';

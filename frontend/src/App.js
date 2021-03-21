@@ -3,9 +3,16 @@ import { Redirect } from 'react-router';
 import { withNamespaces } from 'react-i18next';
 
 import Header from './components/shared/Header.js';
+
+//login page
 import Login from "./components/pages/auth/Login";
-import Dashboard from "./components/pages/EmployeeDashboard/Dashboard";
-import CustomerDetails from "./components/pages/CustomerDetails/CustomerDetails";
+
+// employee pages
+import Dashboard from "./components/pages/employee/EmployeeDashboard/Dashboard";
+import CustomerDetails from "./components/pages/employee/CustomerDetails/CustomerDetails";
+
+// admin pages
+import adminDashboard from "./components/pages/admin/Dashboard"
 
 function App({ t }) {
   return (
@@ -20,6 +27,9 @@ function App({ t }) {
           <Route exact path="/Login" component={Login} />
           <Route exact path="/EmployeeDashboard" component={Dashboard} />
           <Route exact path="/CustomerDetails" component={CustomerDetails} />
+
+          <Route exact path="/AdminDashboard" component={adminDashboard} />
+
           <Redirect from="*" to={"/"} />
         </Switch>
       </Router>

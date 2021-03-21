@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import APP_CONSTANTS, {config} from "../../../core/app_constants";
-import i18n from '../../../core/i18n';
+import APP_CONSTANTS, {config} from "../../../../core/app_constants";
+import i18n from '../../../../core/i18n';
 
-import '../../../assets/styles/employeeDashboard/userView.css'
+import '../../../../assets/styles/employeeDashboard/userView.css'
 
 class UserView extends Component {
     constructor(props) {

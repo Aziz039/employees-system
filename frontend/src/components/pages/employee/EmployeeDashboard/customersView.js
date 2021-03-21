@@ -1,5 +1,5 @@
 import React from 'react';
-import APP_CONSTANTS from "../../../core/app_constants";
+import APP_CONSTANTS from "../../../../core/app_constants";
 import { makeStyles } from '@material-ui/core/styles';
 import { DataGrid, GridToolbar} from '@material-ui/data-grid';
 

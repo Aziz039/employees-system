@@ -45,7 +45,18 @@ class login extends Component {
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.USER, res.data.body.username);
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.TOKEN, res.data.body.token);
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged, true);
-                    window.location.href = "/EmployeeDashboard";
+                    console.log(res.data.body.role);
+                    if (res.data.body.role === "employee") {
+                        window.location.href = "/EmployeeDashboard";
+                    } else if (res.data.body.role === "supervisor") {
+                        console.log("Hi supervisor");
+                    } else if (res.data.body.role === "admin") {
+                        window.location.href = "/AdminDashboard";
+                    } else {
+                        sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.USER);
+                        sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.TOKEN);
+                        sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged);
+                    }
                 } 
             }).catch(error => {alert("Wrong credentials!");});
         }

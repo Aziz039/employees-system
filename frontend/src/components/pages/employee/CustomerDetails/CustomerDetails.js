@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import APP_CONSTANTS, {config, allCols, allNotes, statusOptions} from "../../../core/app_constants";
-import i18n from '../../../core/i18n';
+import APP_CONSTANTS, {config, allCols, allNotes, statusOptions} from "../../../../core/app_constants";
+import i18n from '../../../../core/i18n';
 
-import '../../../assets/styles/customerDashboard/style.css';
+import '../../../../assets/styles/customerDashboard/style.css';
 
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
