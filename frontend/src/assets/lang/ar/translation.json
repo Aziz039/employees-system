@@ -81,6 +81,10 @@
         "form-header-option2": "تحت الاجراء",
         "form-header-option3": "مكتمل",
         "form-header-button": "حفظ"
-
+    },
+    "adminDashboard": {
+        "navbar-header-users": "الموظفين",
+        "navbar-header-customers": "العملاء",
+        "navbar-header-dataManagement": "إدارة البيانات"
     }
 }

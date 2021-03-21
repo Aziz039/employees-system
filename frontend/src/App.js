@@ -12,7 +12,10 @@ import Dashboard from "./components/pages/employee/EmployeeDashboard/Dashboard";
 import CustomerDetails from "./components/pages/employee/CustomerDetails/CustomerDetails";
 
 // admin pages
-import adminDashboard from "./components/pages/admin/Dashboard"
+import adminDashboard from "./components/pages/admin/Dashboard";
+
+// supervisor
+import supervisorDashboard from "./components/pages/supervisor/Dashboard"
 
 function App({ t }) {
   return (
@@ -29,6 +32,8 @@ function App({ t }) {
           <Route exact path="/CustomerDetails" component={CustomerDetails} />
 
           <Route exact path="/AdminDashboard" component={adminDashboard} />
+
+          <Route exact path="/SupervisorDashboard" component={supervisorDashboard} />
 
           <Redirect from="*" to={"/"} />
         </Switch>

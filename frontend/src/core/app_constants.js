@@ -37,7 +37,8 @@ const APP_CONSTANTS = {
 			USER: "USER",
 			TOKEN: "TOKEN",
 			isLogged: "isLogged",
-			targetedCustomerId: "targetedCustomerId"
+			targetedCustomerId: "targetedCustomerId",
+			ROLE: "role"
 		},
 	}, 
 };

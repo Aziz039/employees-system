@@ -10,7 +10,8 @@ class Header extends Component {
              t: props.t,
              NavDir: "",
              isLogged: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged),
-             Language: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.LANGUAGE)
+             Language: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.LANGUAGE),
+             role: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE)
         }
         this.changeLanguage = this.changeLanguage.bind(this);
     }
@@ -54,6 +55,7 @@ class Header extends Component {
         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.TOKEN);
         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.USER);
         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged);
+        sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE);
         window.location.href = "/Login";
       }
     render() {
@@ -67,9 +69,21 @@ class Header extends Component {
                     <div className="collapse navbar-collapse" id="navbarColor02">
                         <ul className={`navbar-nav ${this.state.NavDir}`}>
                             <li className="nav-item ">
-                                <Link style={{ textDecoration: 'none' }} className="nav-link" to="/EmployeeDashboard">{this.state.t('Header.Header-Nav-Dashboard-Button')}
-                                <span className="sr-only">(current)</span>
-                                </Link >
+                                {
+                                    this.state.role === 'admin'? 
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/AdminDashboard">{this.state.t('Header.Header-Nav-Dashboard-Button')}
+                                            <span className="sr-only">(current)</span>
+                                        </Link >
+                                    : this.state.role === 'supervisor'? 
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/SupervisorDashboard">{this.state.t('Header.Header-Nav-Dashboard-Button')}
+                                            <span className="sr-only">(current)</span>
+                                        </Link >
+                                    : 
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/EmployeeDashboard">{this.state.t('Header.Header-Nav-Dashboard-Button')}
+                                            <span className="sr-only">(current)</span>
+                                        </Link >
+                                }
+                                
                             </li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">{this.state.t('Header.Header-Nav-Language-Button')}</Link>
