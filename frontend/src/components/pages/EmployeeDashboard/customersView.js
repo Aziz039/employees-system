@@ -18,7 +18,6 @@ const customerCondFilterModel = {
 export default function BasicToolbarFilteringGrid(test) {
     const rows = test.data;
     const columns = test.cols;
-    console.log(test);
     const classes = useStyles();
     return (
         <div className="container">

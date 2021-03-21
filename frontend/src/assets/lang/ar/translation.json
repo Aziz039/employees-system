@@ -76,6 +76,10 @@
         "form-header-newPaymentDate": "تاريخ السداد الجديد:",
         "form-header-newNotes": "ملاحظات جديدة:",
         "form-header-newStatus": "حالة جديدة:",
+        "form-header-customerStatus": "حالة العميل:",
+        "form-header-option1": "جديد",
+        "form-header-option2": "تحت الاجراء",
+        "form-header-option3": "مكتمل",
         "form-header-button": "حفظ"
 
     }

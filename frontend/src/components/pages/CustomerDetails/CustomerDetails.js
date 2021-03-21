@@ -54,8 +54,6 @@ class CustomerDetails extends Component {
 
     
     setDataFields = () => {
-        console.log(this.state.data);
-        
         allCols.map(field => {
             if (field === "customerStatus" || field === "timestamp") {
             } else { 
@@ -73,6 +71,7 @@ class CustomerDetails extends Component {
         document.getElementById("notes").value = this.state.data["notes"];
         document.getElementById("newStatus").value = this.state.data["newStatus"];
         document.getElementById("newNotes").value = this.state.data["newNotes"];
+        document.getElementById("customerStatus").value = this.state.data["customerStatus"];
         if (this.state.data.paymentDate && this.state.data.newPaymentDate) {
             let day1 = parseInt(this.state.data.paymentDate.slice(0, 2));
             let month1 = parseInt(this.state.data.paymentDate.slice(3,5)) - 1; // month starts from 0
@@ -107,6 +106,7 @@ class CustomerDetails extends Component {
     }
     changeSelectStatusOptionHandler = (event) => {
         this.setState({selectedStatusOption: event.target.value})
+        
     }
     changeSelectNotesOptionHandler = (event) => { 
         console.log(event.target.value);
@@ -181,6 +181,7 @@ class CustomerDetails extends Component {
         let query_newStatus = document.getElementById('newStatus').value;
         let query_newPaymentDate = document.getElementById('newPaymentDate').value;
         let query_newNotes = document.getElementById('newNotes').value;
+        let query_customerStatus = document.getElementById('customerStatus').value;
         
         let quesry = {
             "id": updateQuery,
@@ -198,170 +199,182 @@ class CustomerDetails extends Component {
                 "paymentDate":  query_paymentDate,
                 "newStatus":  query_newStatus,
                 "newNotes":  query_newNotes,
-                "newPaymentDate":  query_newPaymentDate
+                "newPaymentDate":  query_newPaymentDate,
+                "customerStatus": query_customerStatus
             }
         }
         let targetLink = `${APP_CONSTANTS.CONFIG.APIs.CMS.MODIFY_CUSTOMER}`;
         await axios.put(targetLink, quesry, config).then((response) => {
-            console.log(response);
+            sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.targetedCustomerId);
+            window.location.href = "/employeeDashboard"
           }).catch(error => console.log(error));
-        
     }
     render() {
         return (
             <div className="customer-wrapper">
-                    <form className="customer-form">
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-customerName")}</p>
-                                <input className="col-md-6" type="text" id="customerName" name="customerName" readOnly/>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-nationalID")}</p>
-                                <input className="col-md-6" type="text" id="nationalID" name="nationalID" readOnly/>
-                            </div>
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-id")}</p>
-                                <input className="col-md-6" type="text" id="id"  name="id" readOnly />
-                            </div>
+                <form className="customer-form">
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-customerName")}</p>
+                            <input className="col-md-6" type="text" id="customerName" name="customerName" readOnly/>
                         </div>
-                        <hr />
-                        <div className="row">
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-costAfterDiscount")}</p>
-                                <input className="col-md-6" type="text" id="costAfterDiscount" name="costAfterDiscount" readOnly/>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-discount")}</p>
-                                <input className="col-md-6" type="text" id="discount" name="discount" readOnly/>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-cost")}</p>
-                                <input className="col-md-6" type="text" id="cost" name="cost" readOnly/>
-                            </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-nationalID")}</p>
+                            <input className="col-md-6" type="text" id="nationalID" name="nationalID" readOnly/>
                         </div>
-                        <hr />
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-firstBillDate")}</p>
-                                <input className="col-md-6" type="text" id="firstBillDate" name="firstBillDate" readOnly />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-lastBillDate")}</p>
-                                <input className="col-md-6" type="text" id="lastBillDate" name="lastBillDate" readOnly/>
-                            </div>
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-id")}</p>
+                            <input className="col-md-6" type="text" id="id"  name="id" readOnly />
                         </div>
-                        <hr />
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone1")}</p>
-                                <input className="col-md-6" type="text" id="phone1" name="phone1"  />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone2")}</p>
-                                <input className="col-md-6" type="text" id="phone2" name="phone2" />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone3")}</p>
-                                <input className="col-md-6" type="text" id="phone3" name="phone3" />
-                            </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-costAfterDiscount")}</p>
+                            <input className="col-md-6" type="text" id="costAfterDiscount" name="costAfterDiscount" readOnly/>
                         </div>
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone4")}</p>
-                                <input className="col-md-6" type="text" id="phone4" name="phone4"  />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone5")}</p>
-                                <input className="col-md-6" type="text" id="phone5" name="phone5" />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone6")}</p>
-                                <input className="col-md-6" type="text" id="phone6" name="phone6" />
-                            </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-discount")}</p>
+                            <input className="col-md-6" type="text" id="discount" name="discount" readOnly/>
                         </div>
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone7")}</p>
-                                <input className="col-md-6" type="text" id="phone7" name="phone7"  />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-phone8")}</p>
-                                <input className="col-md-6" type="text" id="phone8" name="phone8" />
-                            </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-cost")}</p>
+                            <input className="col-md-6" type="text" id="cost" name="cost" readOnly/>
                         </div>
-                        <hr />
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-collecterUsername")}</p>
-                                <input className="col-md-6" type="text" id="collecterUsername" name="collecterUsername" readOnly />
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-attributionDate")}</p>
-                                <input className="col-md-6" type="text" id="attributionDate" name="attributionDate" readOnly/>
-                            </div>
+                    </div>
+                    <hr />
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-firstBillDate")}</p>
+                            <input className="col-md-6" type="text" id="firstBillDate" name="firstBillDate" readOnly />
                         </div>
-                        <hr />
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-status")}</p>
-                                <select id="status" className="col-md-6 custom-select" onChange={this.changeSelectStatusOptionHandler}>
-                                    {this.state.statusOptions.map( (option) =>
-                                        <option value={option}>{option}</option>
-                                    )}
-                                </select>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-notes")}</p>
-                                <select id="notes" className="col-md-6 custom-select" onChange={this.changeSelectNotesOptionHandler}>
-                                    { 
-                                        this.state.statusOptions.map(this.handleDropdownChangeNotes)
-                                    }
-                                </select>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-paymentDate")}</p>
-                                <DatePicker id="paymentDate" className="col-md-8 datePicker"
-                                    selected= { this.state.paymentDatePicker}
-                                    onChange= { this.handleChangeDate }
-                                    name="paymentDate"
-                                    dateFormat="dd/MM/yyyy"
-                                />
-                            </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-lastBillDate")}</p>
+                            <input className="col-md-6" type="text" id="lastBillDate" name="lastBillDate" readOnly/>
                         </div>
-                        <hr />
-                        <div className="row" >
-                            <div className="col-md-4 customer-form-content ">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-newStatus")}</p>
-                                <select id="newStatus" className="col-md-6 custom-select" onChange={this.changeSelectNewStatusOptionHandler}>
-                                    {this.state.statusOptions.map( (option) =>
-                                        <option value={option}>{option}</option>
-                                    )}
-                                </select>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-newNotes")}</p>
-                                <select id="newNotes" className="col-md-6 custom-select" onChange={this.changeSelectNewNotesOptionHandler}>
-                                    { 
-                                        this.state.statusOptions.map(this.handleDropdownChangeNewNotes)
-                                    }
-                                </select>
-                            </div>
-                            <div className="col-md-4 customer-form-content">
-                                <p className="col-md-4">{i18n.t("customerDetails.form-header-newPaymentDate")}</p>
-                                <DatePicker id="newPaymentDate" className="col-md-8 datePicker"
-                                    selected= { this.state.newPaymentDatePicker}
-                                    onChange= { this.handleChangeNewDate }
-                                    name="newPaymentDate"
-                                    dateFormat="dd/MM/yyyy"
-                                />
-                            </div>
+                    </div>
+                    <hr />
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone1")}</p>
+                            <input className="col-md-6" type="text" id="phone1" name="phone1"  />
                         </div>
-                        <hr />
-                        <div className="row justify-content-md-center" >
-                            <input className="col-md-2 btn btn-primary" value={i18n.t("customerDetails.form-header-button")} type="submit" onClick={this.handleEdit}/>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone2")}</p>
+                            <input className="col-md-6" type="text" id="phone2" name="phone2" />
                         </div>
-                    </form>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone3")}</p>
+                            <input className="col-md-6" type="text" id="phone3" name="phone3" />
+                        </div>
+                    </div>
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone4")}</p>
+                            <input className="col-md-6" type="text" id="phone4" name="phone4"  />
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone5")}</p>
+                            <input className="col-md-6" type="text" id="phone5" name="phone5" />
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone6")}</p>
+                            <input className="col-md-6" type="text" id="phone6" name="phone6" />
+                        </div>
+                    </div>
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone7")}</p>
+                            <input className="col-md-6" type="text" id="phone7" name="phone7"  />
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-phone8")}</p>
+                            <input className="col-md-6" type="text" id="phone8" name="phone8" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-collecterUsername")}</p>
+                            <input className="col-md-6" type="text" id="collecterUsername" name="collecterUsername" readOnly />
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-attributionDate")}</p>
+                            <input className="col-md-6" type="text" id="attributionDate" name="attributionDate" readOnly/>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-status")}</p>
+                            <select id="status" className="col-md-6 custom-select" onChange={this.changeSelectStatusOptionHandler}>
+                                {this.state.statusOptions.map( (option) =>
+                                    <option value={option}>{option}</option>
+                                )}
+                            </select>
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-notes")}</p>
+                            <select id="notes" className="col-md-6 custom-select" onChange={this.changeSelectNotesOptionHandler}>
+                                { 
+                                    this.state.statusOptions.map(this.handleDropdownChangeNotes)
+                                }
+                            </select>
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-paymentDate")}</p>
+                            <DatePicker id="paymentDate" className="col-md-8 datePicker"
+                                selected= { this.state.paymentDatePicker}
+                                onChange= { this.handleChangeDate }
+                                name="paymentDate"
+                                dateFormat="dd/MM/yyyy"
+                            />
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row" >
+                        <div className="col-md-4 customer-form-content ">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-newStatus")}</p>
+                            <select id="newStatus" className="col-md-6 custom-select" onChange={this.changeSelectNewStatusOptionHandler}>
+                                {this.state.statusOptions.map( (option) =>
+                                    <option value={option}>{option}</option>
+                                )}
+                            </select>
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-newNotes")}</p>
+                            <select id="newNotes" className="col-md-6 custom-select" onChange={this.changeSelectNewNotesOptionHandler}>
+                                { 
+                                    this.state.statusOptions.map(this.handleDropdownChangeNewNotes)
+                                }
+                            </select>
+                        </div>
+                        <div className="col-md-4 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-newPaymentDate")}</p>
+                            <DatePicker id="newPaymentDate" className="col-md-8 datePicker"
+                                selected= { this.state.newPaymentDatePicker}
+                                onChange= { this.handleChangeNewDate }
+                                name="newPaymentDate"
+                                dateFormat="dd/MM/yyyy"
+                            />
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-md-5 customer-form-content">
+                            <p className="col-md-4">{i18n.t("customerDetails.form-header-customerStatus")}</p>
+                            <select id="customerStatus" className="col-md-6 custom-select" onChange={this.changeSelectcustomerStatusHandler}>
+                                <option value="new">{i18n.t("customerDetails.form-header-option1")}</option>
+                                <option value="in progress">{i18n.t("customerDetails.form-header-option2")}</option>
+                                <option value="done">{i18n.t("customerDetails.form-header-option3")}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row justify-content-md-center" >
+                        <input className="col-md-2 btn btn-primary" value={i18n.t("customerDetails.form-header-button")} type="submit" onClick={this.handleEdit}/>
+                    </div>
+                </form>
             </div>
         );
     }

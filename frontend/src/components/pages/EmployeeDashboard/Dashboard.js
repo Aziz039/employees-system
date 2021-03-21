@@ -58,7 +58,7 @@ class Dashboard extends Component {
             { field: "costAfterDiscount", headerName: i18n.t('EmployeeDashboard.table_column_costAfterDiscount'), width: 170 },
             { field: "lastBillDate", headerName: i18n.t('EmployeeDashboard.table_column_lastBillDate'), width: 170 }, 
             { field: "firstBillDate", headerName: i18n.t('EmployeeDashboard.table_column_firstBillDate'), width: 170, hide: true  },
-            { field: "phone1", headerName: i18n.t('EmployeeDashboard.table_column_phone1'), width: 170 }, 
+            { field: "phone1", headerName: i18n.t('EmployeeDashboard.table_column_phone1'), width: 170, hide: true }, 
             { field: "phone2", headerName: i18n.t('EmployeeDashboard.table_column_phone2'), width: 170, hide: true  },
             { field: "phone3", headerName: i18n.t('EmployeeDashboard.table_column_phone3'), width: 170, hide: true  },
             { field: "phone4", headerName: i18n.t('EmployeeDashboard.table_column_phone4'), width: 170, hide: true  },
@@ -69,11 +69,12 @@ class Dashboard extends Component {
             { field: "collecterUsername", headerName: i18n.t('EmployeeDashboard.table_column_collecterUsername'), width: 170, hide: true  }, 
             { field: "attributionDate", headerName: i18n.t('EmployeeDashboard.table_column_attributionDate'), width: 170 }, 
             { field: "status", headerName: i18n.t('EmployeeDashboard.table_column_status'), width: 170 }, 
-            { field: "notes", headerName: i18n.t('EmployeeDashboard.table_column_notes'), width: 170 }, 
-            { field: "paymentDate", headerName: i18n.t('EmployeeDashboard.table_column_paymentDate'), width: 170 }, 
-            { field: "newStatus", headerName: i18n.t('EmployeeDashboard.table_column_newStatus'), width: 170 },
+            { field: "notes", headerName: i18n.t('EmployeeDashboard.table_column_notes'), width: 170, hide: true }, 
+            { field: "paymentDate", headerName: i18n.t('EmployeeDashboard.table_column_paymentDate'), width: 170, hide: true }, 
+            { field: "newStatus", headerName: i18n.t('EmployeeDashboard.table_column_newStatus'), width: 170, hide: true },
             { field: "newPaymentDate", headerName:i18n.t('EmployeeDashboard.table_column_newPaymentDate'), width: 170, hide: true  },
             { field: "newNotes", headerName: i18n.t('EmployeeDashboard.table_column_newNotes'), width: 170, hide: true  },
+            { field: "customerStatus", headerName: i18n.t('EmployeeDashboard.table_column_customerStatus'), width: 170},
         ];
         this.setState({all_col: columns});
     }

@@ -76,6 +76,10 @@
         "form-header-newPaymentDate": "New payment date:",
         "form-header-newNotes": "New notes:",
         "form-header-newStatus": "New condition:",
+        "form-header-customerStatus": "Customer status:",
+        "form-header-option1": "new",
+        "form-header-option2": "in progress",
+        "form-header-option3": "done",
         "form-header-button": "save"
     }
 }

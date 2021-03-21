@@ -55,6 +55,8 @@ export const allNotes = [
 	['بعد ماسمع زين قفل', 'معترض ومايبغاء يسدد' ],
 	['الو وقفل', 'مايتكلم', 'الصوت غير واضح', 'اجنبي لايتحدث العربية', 'مشكلة شبكة', 'يعرف العميل']];
 
+
+
 export const userToken = sessionStorage.getItem(
 	APP_CONSTANTS.CONFIG.sessionStorage.TOKEN
 );
