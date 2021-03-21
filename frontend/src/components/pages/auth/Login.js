@@ -59,9 +59,9 @@ class login extends Component {
                         <img src={LoginAvatar} id="iconn" alt="User Icon" />
                     </div>
                     <form>
-                        <input placeholder={i18n.t("LoginPage.Login-Card-Username")} id="username" type="text" className="fadeIn second" name="username" onChange={this.handleChange}/>                
-                        <input placeholder={i18n.t("LoginPage.Login-Card-Password")} id="password" type="password" className="fadeIn third" name="password" onChange={this.handleChange}/>
-                        <input  value={i18n.t("LoginPage.Login-Card-Header")} type="submit" className="fadeIn fourth " onClick={this.handleSubmit} />
+                        <input placeholder={i18n.t("LoginPage.Login-Card-Username")} id="username" type="text" className="fadeIn second inputLogin" name="username" onChange={this.handleChange}/>                
+                        <input placeholder={i18n.t("LoginPage.Login-Card-Password")} id="password" type="password" className="fadeIn third inputPassword" name="password" onChange={this.handleChange}/>
+                        <input  value={i18n.t("LoginPage.Login-Card-Header")} type="submit" className="fadeIn fourth inputButton" onClick={this.handleSubmit} />
                     </form>
                 </div>
             </div>

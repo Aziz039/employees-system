@@ -48,6 +48,35 @@
         "table_column_customerStatus": "حالة العميل",
         "table_column_timestamp": "تاريخ الاضافة",
         "table_column_chooseField": "اختر القوائم",
-        "table_column_edit": "تعديل"
+        "table_column_edit": "تعديل",
+        "table_filter_select": "اختر القوائم"
+    },
+    "customerDetails": {
+        "form-header-id": "رقم العقد:",
+        "form-header-nationalID": "رقم الهوية:",
+        "form-header-customerName": "اسم العميل:",
+        "form-header-cost": "المبلغ:",
+        "form-header-discount": "نسبة الخصم:",
+        "form-header-costAfterDiscount": "الملبغ بعد الخصم:",
+        "form-header-lastBillDate": "تاريخ اخر فاتورة:",
+        "form-header-firstBillDate": "تاريخ اول فاتورة:",
+        "form-header-phone1": "رقم 1:",
+        "form-header-phone2": "رقم 2:",
+        "form-header-phone3": "رقم 3:",
+        "form-header-phone4": "رقم 4:",
+        "form-header-phone5": "رقم 5:",
+        "form-header-phone6": "رقم 6:",
+        "form-header-phone7": "رقم 7:",
+        "form-header-phone8": "رقم 8:",
+        "form-header-collecterUsername": "المحصل:",
+        "form-header-attributionDate": "تاريخ الاسناد:",
+        "form-header-paymentDate": "تاريخ وعد السداد:",
+        "form-header-notes": "ملاحظات:",
+        "form-header-status": "الحالة:",
+        "form-header-newPaymentDate": "تاريخ السداد الجديد:",
+        "form-header-newNotes": "ملاحظات جديدة:",
+        "form-header-newStatus": "حالة جديدة:",
+        "form-header-button": "حفظ"
+
     }
 }

@@ -50,30 +50,30 @@ class Dashboard extends Component {
     }
     getCols = () => {
         const columns = [
-            { key: i18n.t('EmployeeDashboard.table_column_id'), accessor: "id", Header: i18n.t('EmployeeDashboard.table_column_id'), minWidth: 170, fixed: "left" }, // 
-            { key: i18n.t('EmployeeDashboard.table_column_customerName'), accessor: "customerName", Header: i18n.t('EmployeeDashboard.table_column_customerName'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_nationalID'), accessor: "nationalID", Header: i18n.t('EmployeeDashboard.table_column_nationalID'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_cost'), accessor: "cost", Header: i18n.t('EmployeeDashboard.table_column_cost'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_discount'), accessor: "discount", Header: i18n.t('EmployeeDashboard.table_column_discount'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_costAfterDiscount'), accessor: "costAfterDiscount", Header: i18n.t('EmployeeDashboard.table_column_costAfterDiscount'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_lastBillDate'), accessor: "lastBillDate", Header: i18n.t('EmployeeDashboard.table_column_lastBillDate'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_firstBillDate'), accessor: "firstBillDate", Header: i18n.t('EmployeeDashboard.table_column_firstBillDate'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone1'), accessor: "phone1", Header: i18n.t('EmployeeDashboard.table_column_phone1'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_phone2'), accessor: "phone2", Header: i18n.t('EmployeeDashboard.table_column_phone2'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone3'), accessor: "phone3", Header: i18n.t('EmployeeDashboard.table_column_phone3'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone4'), accessor: "phone4", Header: i18n.t('EmployeeDashboard.table_column_phone4'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone5'), accessor: "phone5", Header: i18n.t('EmployeeDashboard.table_column_phone5'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone6'), accessor: "phone6", Header: i18n.t('EmployeeDashboard.table_column_phone6'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone7'), accessor: "phone7", Header: i18n.t('EmployeeDashboard.table_column_phone7'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_phone8'), accessor: "phone8", Header: i18n.t('EmployeeDashboard.table_column_phone8'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_collecterUsername'), accessor: "collecterUsername", Header: i18n.t('EmployeeDashboard.table_column_collecterUsername'), minWidth: 100 }, 
-            { key: i18n.t('EmployeeDashboard.table_column_attributionDate'), accessor: "attributionDate", Header: i18n.t('EmployeeDashboard.table_column_attributionDate'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_status'), accessor: "status", Header: i18n.t('EmployeeDashboard.table_column_status'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_notes'), accessor: "notes", Header: i18n.t('EmployeeDashboard.table_column_notes'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_paymentDate'), accessor: "paymentDate", Header: i18n.t('EmployeeDashboard.table_column_paymentDate'), minWidth: 100 }, //
-            { key: i18n.t('EmployeeDashboard.table_column_newStatus'), accessor: "newStatus", Header: i18n.t('EmployeeDashboard.table_column_newStatus'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_newPaymentDate'), accessor: "newPaymentDate", Header:i18n.t('EmployeeDashboard.table_column_newPaymentDate'), minWidth: 100 },
-            { key: i18n.t('EmployeeDashboard.table_column_newNotes'), accessor: "newNotes", Header: i18n.t('EmployeeDashboard.table_column_newNotes'), minWidth: 100 },
+            { field: 'id', headerName: i18n.t('EmployeeDashboard.table_column_id'), width: 170, fixed: "left" }, 
+            { field: 'customerName', headerName: i18n.t('EmployeeDashboard.table_column_customerName'), width: 170 }, 
+            { field: 'nationalID', headerName: i18n.t('EmployeeDashboard.table_column_nationalID'), width: 170, hide: true }, 
+            { field: 'cost', headerName: i18n.t('EmployeeDashboard.table_column_cost'), width: 170, hide: true }, 
+            { field: "discount", headerName: i18n.t('EmployeeDashboard.table_column_discount'), width: 170, hide: true },
+            { field: "costAfterDiscount", headerName: i18n.t('EmployeeDashboard.table_column_costAfterDiscount'), width: 170 },
+            { field: "lastBillDate", headerName: i18n.t('EmployeeDashboard.table_column_lastBillDate'), width: 170 }, 
+            { field: "firstBillDate", headerName: i18n.t('EmployeeDashboard.table_column_firstBillDate'), width: 170, hide: true  },
+            { field: "phone1", headerName: i18n.t('EmployeeDashboard.table_column_phone1'), width: 170 }, 
+            { field: "phone2", headerName: i18n.t('EmployeeDashboard.table_column_phone2'), width: 170, hide: true  },
+            { field: "phone3", headerName: i18n.t('EmployeeDashboard.table_column_phone3'), width: 170, hide: true  },
+            { field: "phone4", headerName: i18n.t('EmployeeDashboard.table_column_phone4'), width: 170, hide: true  },
+            { field: "phone5", headerName: i18n.t('EmployeeDashboard.table_column_phone5'), width: 170, hide: true  },
+            { field: "phone6", headerName: i18n.t('EmployeeDashboard.table_column_phone6'), width: 170, hide: true  },
+            { field: "phone7", headerName: i18n.t('EmployeeDashboard.table_column_phone7'), width: 170, hide: true  },
+            { field: "phone8", headerName: i18n.t('EmployeeDashboard.table_column_phone8'), width: 170, hide: true  },
+            { field: "collecterUsername", headerName: i18n.t('EmployeeDashboard.table_column_collecterUsername'), width: 170, hide: true  }, 
+            { field: "attributionDate", headerName: i18n.t('EmployeeDashboard.table_column_attributionDate'), width: 170 }, 
+            { field: "status", headerName: i18n.t('EmployeeDashboard.table_column_status'), width: 170 }, 
+            { field: "notes", headerName: i18n.t('EmployeeDashboard.table_column_notes'), width: 170 }, 
+            { field: "paymentDate", headerName: i18n.t('EmployeeDashboard.table_column_paymentDate'), width: 170 }, 
+            { field: "newStatus", headerName: i18n.t('EmployeeDashboard.table_column_newStatus'), width: 170 },
+            { field: "newPaymentDate", headerName:i18n.t('EmployeeDashboard.table_column_newPaymentDate'), width: 170, hide: true  },
+            { field: "newNotes", headerName: i18n.t('EmployeeDashboard.table_column_newNotes'), width: 170, hide: true  },
         ];
         this.setState({all_col: columns});
     }

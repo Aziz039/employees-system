@@ -12,6 +12,7 @@ class UserView extends Component {
         this.state = {
             usename: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER),
             isLogged: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged),
+            Language: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.LANGUAGE),
             data:[]
         }
         i18n.changeLanguage(this.state.Language);
@@ -37,41 +38,41 @@ class UserView extends Component {
     render() {
         return (
                 <div className="container">
-                    <div className="row">
+                    <div className="row userView">
                         <div className="col-sm-4">
                             <div className="card-header mr-auto">{i18n.t("EmployeeDashboard.userView-name")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.name}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.name}`} disabled />
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card-header">{i18n.t("EmployeeDashboard.userView-supervisor")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.supervisor}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.supervisor}`} disabled />
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card-header">{i18n.t("EmployeeDashboard.userView-branch")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.branch}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.branch}`} disabled />
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card-header">{i18n.t("EmployeeDashboard.userView-todo")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.todoCustomers}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.todoCustomers}`} disabled />
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card-header">{i18n.t("EmployeeDashboard.userView-inporgress")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.inProgressCustomers}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.inProgressCustomers}`} disabled />
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card-header">{i18n.t("EmployeeDashboard.userView-done")}</div>
                             <div className="card-body">
-                                <input className="form-control inputy" type="text" placeholder={`${this.state.data.doneCustomers}`} disabled />
+                                <input className="form-control userViewInput" type="text" placeholder={`${this.state.data.doneCustomers}`} disabled />
                             </div>
                         </div>
                     </div>

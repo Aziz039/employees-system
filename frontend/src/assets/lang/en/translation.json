@@ -48,6 +48,34 @@
         "table_column_customerStatus": "Customer status",
         "table_column_timestamp": "Added date",
         "table_column_chooseField": "Select columns",
-        "table_column_edit": "EDIT"
+        "table_column_edit": "EDIT",
+        "table_filter_select": "Select columns"
+    },
+    "customerDetails": {
+        "form-header-id": "Contract ID:",
+        "form-header-nationalID": "National ID:",
+        "form-header-customerName": "Customer name:",
+        "form-header-cost": "Cost:",
+        "form-header-discount": "Discount:",
+        "form-header-costAfterDiscount": "Cost after discount:",
+        "form-header-lastBillDate": "Last bill date:",
+        "form-header-firstBillDate": "First bill date:",
+        "form-header-phone1": "Phone 1:",
+        "form-header-phone2": "Phone 2:",
+        "form-header-phone3": "Phone 3:",
+        "form-header-phone4": "Phone 4:",
+        "form-header-phone5": "Phone 5:",
+        "form-header-phone6": "Phone 6:",
+        "form-header-phone7": "Phone 7:",
+        "form-header-phone8": "Phone 8:",
+        "form-header-collecterUsername": "Collecter:",
+        "form-header-attributionDate": "Attribution date:",
+        "form-header-paymentDate": "Payment date:",
+        "form-header-notes": "Notes:",
+        "form-header-status": "Status:",
+        "form-header-newPaymentDate": "New payment date:",
+        "form-header-newNotes": "New notes:",
+        "form-header-newStatus": "New condition:",
+        "form-header-button": "save"
     }
 }
