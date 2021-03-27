@@ -1,6 +1,6 @@
 const { json } = require("body-parser");
-const constants = require("../core/app_constants"),
-	res = require("../core/response");
+const constants = require("../../core/app_constants"),
+	res = require("../../core/response");
 
 module.exports = {
 	get_all_user_customers: async (collecterUsername) => {
@@ -13,15 +13,15 @@ module.exports = {
 						return error
 							? reject({ code: 2000, message: error.code })
 							: resolve(
-									res.create(
-										data.length > 0
-											? `Collecter's customers fetched successfully`
-											: `Collector does not have customers`,
-										data.length > 0 ? data : null
-									),
-									helper_updateCustomerCount(collecterUsername, data.length),
-									helper_updateUserCollectionMoney(collecterUsername)
-							  );
+								res.create(
+									data.length > 0
+										? `Collecter's customers fetched successfully`
+										: `Collector does not have customers`,
+									data.length > 0 ? data : null
+								),
+								helper_updateCustomerCount(collecterUsername, data.length),
+								helper_updateUserCollectionMoney(collecterUsername)
+							);
 					}
 				);
 			} catch (error) {
@@ -39,13 +39,13 @@ module.exports = {
 						return error
 							? reject({ code: 2000, message: error.code })
 							: resolve(
-									res.create(
-										data.length > 0
-											? `Collecter's customer fetched successfully`
-											: `Collector does not have a customer with this contact ID`,
-										data.length > 0 ? data : null
-									)
-							  );
+								res.create(
+									data.length > 0
+										? `Collecter's customer fetched successfully`
+										: `Collector does not have a customer with this contact ID`,
+									data.length > 0 ? data : null
+								)
+							);
 					}
 				);
 			} catch (error) {
@@ -66,44 +66,10 @@ module.exports = {
 						return error
 							? reject({ code: 2000, message: error.code })
 							: resolve(
-									res.create(
-										data.affectedRows > 0
-											? `Customer was modified successfully`
-											: `Customer could not be modified`,
-										data.affectedRows > 0 ? data : null
-									)
-							  );
-					}
-				);
-			} catch (error) {
-				return reject({ code: 2001, message: error.code });
-			}
-		});
-	},
-	add_user_customer: async (content) => {
-		return new Promise((resolve, reject) => {
-			try {
-				console.log(content);
-				constants.sql.query(
-					`INSERT INTO ${constants.dotenv.parsed.table_customers} (id, name, nationalID, cost, discount, costAfterDiscount, lastBillDate, firstBillDate, phone1, phone2, phone3, phone4, phone5, phone6, phone7, phone8, collecterUsername, attributionDate, status, notes, paymentDate, newCondition, secondPaymentDate, secondNotes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-					[
-						content.id, content.name , content.nationalID ,
-						content.cost , content.discount , content.costAfterDiscount,
-						content.lastBillDate, content.firstBillDate , content.phone1 ,
-						content.phone2 , content.phone3 , content.phone4,
-						content.phone5, content.phone6 , content.phone7 ,
-						content.phone8 , content.collecterUsername , content.attributionDate,
-						content.status, content.notes , content.paymentDate ,
-						content.newCondition , content.secondPaymentDate , content.secondNotes
-					],
-					(error, data) => {
-						return error
-							? reject({ code: 2000, message: error.code })
-							: resolve(
 								res.create(
 									data.affectedRows > 0
-										? `Customer added successfully`
-										: `Could not add customer`,
+										? `Customer was modified successfully`
+										: `Customer could not be modified`,
 									data.affectedRows > 0 ? data : null
 								)
 							);
@@ -111,30 +77,6 @@ module.exports = {
 				);
 			} catch (error) {
 				return reject({ code: 2001, message: error.code });
-			}
-		});
-	},
-	delete_user_customer: async (content) => {
-		return new Promise((resolve, reject) => {
-			try {
-				constants.sql.query(
-					`DELETE FROM ${constants.dotenv.parsed.table_customers} WHERE id=?`,
-					[content.id],
-					(error, data) => {
-						return error
-							? reject({ code: 1007, message: error.code })
-							: resolve(
-									res.create(
-										data.affectedRows > 0
-											? "Customer deleted successfully"
-											: "Customer has already been deleted or does not exist",
-										null
-									)
-							  );
-					}
-				);
-			} catch (error) {
-				return reject({ code: 1008, message: "could not perform transaction" });
 			}
 		});
 	},
@@ -155,7 +97,7 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 	);
 	constants.sql.query(
 		`SELECT COUNT(*) FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND customerStatus=?`,
-		[username, 'to do'],
+		[username, 'new'],
 		(error, data) => {
 			error
 				? console.log(error)
@@ -166,7 +108,7 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 								error
 									? console.log("Error updating user's customer count")
 									: data.affectedRows > 0 ? 
-										console.log("customer to do count updated for ", username)
+										console.log("customer new count updated for ", username)
 										: console.log("No customers updated")
 							}
 					);	
@@ -218,7 +160,7 @@ const helper_updateCustomerCount = (username, countCustomers) => {
 const helper_updateUserCollectionMoney = (username) => {
 	constants.sql.query(
 		`SELECT costAfterDiscount FROM ${constants.dotenv.parsed.table_customers} WHERE collecterUsername=? AND  (customerStatus=? OR customerStatus=?)`,
-		[username, 'to do', 'in progress'],
+		[username, 'new', 'in progress'],
 		(error, data) => {
 			if (error){
 				console.log(error)

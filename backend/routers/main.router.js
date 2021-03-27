@@ -1,20 +1,31 @@
-
 const   constants = require("../core/app_constants"),
         router = constants.express.Router(),
         auth_router = require("./auth.router"),
-        users_router = require("./users.router"),
-        cms_router = require("./cms.router"),
+        admin_router = require("./admin/admin.router"),
+        // supervisor_router = require("./supervisor/supervisor.router"),
+        user_router = require("./user/user.router"),
         mw = require("../core/mw");
 
+
 router
-    .use("/api/cms", 
-            mw.headers_setup,
-            mw.api_key,
-            cms_router)
-    .use("/api/users", 
-            mw.headers_setup,
-            mw.api_key,
-            users_router)
-    .use("/api/auth", auth_router);
+        .use("/api/admin", 
+                mw.headers_setup,
+                mw.api_key,
+                admin_router)
+        .use("/api/user", 
+                mw.headers_setup,
+                mw.api_key,
+                user_router)
+        .use("/api/auth", auth_router);
+
+        // .use("/api/admin", 
+        //         mw.headers_setup,
+        //         mw.api_key,
+        //         admin_router)
+        // .use("/api/supervisor", 
+        //         mw.headers_setup,
+        //         mw.api_key,
+        //         supervisor_router)
+
 
 module.exports = router;
