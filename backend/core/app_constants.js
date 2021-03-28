@@ -4,7 +4,7 @@ const path = require("path"),
 	jwt = require("jsonwebtoken");
 
 const dotenv = require("dotenv").config({ path: path.resolve(process.cwd(), "local.env") });
-
+client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 module.exports = {
 	fs: require("fs"),
 	dotenv: dotenv,
@@ -81,6 +81,26 @@ module.exports = {
 		port: 3306,
 		ssl: true
 	}),
+	sms: async (content) => {
+		return new Promise((resolve, reject) => {
+			try {
+				console.log(content);
+				client.messages
+					.create({
+						body: content.body,
+						from: '+12162202550',
+						to: content.to
+					})
+					.then(message =>  resolve(console.log(message)))
+					.catch(err => console.log(err));
+					console.log("hi");
+			} catch (error) {
+				reject(error);
+			}
+		});
+		
+		
+	}
 };
 
 // local

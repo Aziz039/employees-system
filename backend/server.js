@@ -4,13 +4,15 @@ const constants = require("./core/app_constants"),
 	main_router = require("./routers/main.router"),
     cors = require('cors');
 
-    app.use(cors());
-    app.use(
-        express.json(),
-        constants.bodyParser.json(),
-        ("/api", main_router),
-    );
 
+const port = process.env.PORT || 5000;
 
+app.use(cors());
 
-app.listen(2030);
+app.use(
+    express.json(),
+    constants.bodyParser.json(),
+    ("/api", main_router),
+);
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
