@@ -80,6 +80,24 @@ module.exports = {
 			}
 		});
 	},
+	send_sms_customer: async (contents) => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sms(contents).then(data => {
+					return resolve(
+							res.create(
+								data.errorMessage
+									? `error - ${data.errorMessage}`
+									: `Message sent successfully!`,
+								data ? data : null
+							)
+						);
+				}).catch(err => reject({ code: 2001, message: err }));
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
+	},
 };
 
 

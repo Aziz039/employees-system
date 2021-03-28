@@ -74,26 +74,24 @@ module.exports = {
 		});
 	},
 	sql: sql.createConnection({
-		host: process.env.database_host_azure,
-		user: process.env.database_user_azure,
-		password: process.env.database_password_azure,
+		host: process.env.database_host,
+		user: process.env.database_user,
+		password: process.env.database_password,
 		database: process.env.database_database,
-		port: 3306,
-		ssl: true
+		queryTimeout: 60000,
+		timezone: "-03:00",
 	}),
 	sms: async (content) => {
 		return new Promise((resolve, reject) => {
 			try {
-				console.log(content);
 				client.messages
 					.create({
-						body: content.body,
+						body: content.message,
 						from: '+12162202550',
 						to: content.to
 					})
-					.then(message =>  resolve(console.log(message)))
-					.catch(err => console.log(err));
-					console.log("hi");
+					.then(message =>  resolve(message))
+					.catch(err => reject(err));
 			} catch (error) {
 				reject(error);
 			}

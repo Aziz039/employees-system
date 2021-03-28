@@ -39,4 +39,16 @@ module.exports = {
 			next();
 		}
 	},
+	send_sms_customer: async (request, response, next) => {
+		// send an sms to the customer
+		try {
+			response.body = await m.send_sms_customer(request.body.content);
+			response.status(200).send(response.body);
+			next();
+		} catch (error) {
+			response.body = res.error(error);
+			response.status(500).send(response.body);
+			next();
+		}
+	},
 };
