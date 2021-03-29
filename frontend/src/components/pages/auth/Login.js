@@ -46,11 +46,11 @@ class login extends Component {
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.TOKEN, res.data.body.token);
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE, res.data.body.role);
                     sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged, true);
-                    if (res.data.body.role === "employee") {
+                    if (res.data.body.role.toLowerCase() === "employee") {
                         window.location.href = "/EmployeeDashboard";
                     } else if (res.data.body.role === "supervisor") {
                         console.log("Hi supervisor");
-                    } else if (res.data.body.role === "admin") {
+                    } else if (res.data.body.role.toLowerCase() === "admin") {
                         window.location.href = "/AdminDashboard";
                     } else {
                         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.USER);

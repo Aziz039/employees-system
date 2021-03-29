@@ -8,7 +8,4 @@ router
 	.post("/sms", constants.verify_token, c.send_sms_customer)
 	; 
 
-	// .post("/user_customers", constants.verify_token, c.add_user_customer) // add customer
-	// .delete("/user_customers", constants.verify_token, c.delete_user_customer) // delete customer
-
 module.exports = router;

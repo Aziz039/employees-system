@@ -18,10 +18,6 @@ router
                 user_router)
         .use("/api/auth", auth_router);
 
-        // .use("/api/admin", 
-        //         mw.headers_setup,
-        //         mw.api_key,
-        //         admin_router)
         // .use("/api/supervisor", 
         //         mw.headers_setup,
         //         mw.api_key,

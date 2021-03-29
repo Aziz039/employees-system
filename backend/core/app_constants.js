@@ -38,7 +38,7 @@ module.exports = {
 	},
 	sign_token: (username) => {
 		try {
-			let expireTime = Date.now() + 25200000; // expires in 7 hours
+			let expireTime = Date.now() + 86400000; // 25200000 = expires in 7 hours - 86400000 = 24hr
 			let tokenKey = jwt.sign({ username, expireTime }, process.env.api_key);
 			return tokenKey;
 		} catch (error) {
