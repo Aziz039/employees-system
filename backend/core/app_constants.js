@@ -74,12 +74,12 @@ module.exports = {
 		});
 	},
 	sql: sql.createConnection({
-		host: process.env.database_host,
-		user: process.env.database_user,
-		password: process.env.database_password,
+		host: process.env.database_host_azure,
+		user: process.env.database_user_azure,
+		password: process.env.database_password_azure,
 		database: process.env.database_database,
-		queryTimeout: 60000,
-		timezone: "-03:00",
+		port: 3306,
+		ssl: true
 	}),
 	sms: async (content) => {
 		return new Promise((resolve, reject) => {

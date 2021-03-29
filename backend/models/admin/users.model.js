@@ -25,7 +25,114 @@ module.exports = {
 			}
 		});
 	},
-
+	get_a_user: async (username) => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sql.query(
+					`SELECT username, nationalID, name, role, nationality, supervisor, branch, userType, totalCustomersCount, todoCustomers, inProgressCustomers, doneCustomers, pendingMoney, collectedMoney, timestamp FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
+					[username],
+					(error, data) => {
+						return error
+							? reject({ code: 1002, message: "could not perform transaction" })
+							: resolve(
+									res.create(
+										data.length > 0
+											? "user fetched successfully"
+											: "user not found",
+										data.length > 0 ? data : null
+									)
+							);
+					}
+				);
+			} catch (error) {
+				return reject({ code: 1003, message: "could not perform transaction" });
+			}
+		});
+	},
+	get_supervisor_users: async (supervisor) => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.sql.query(
+					`SELECT username, nationalID, name, role, nationality, branch, userType, totalCustomersCount, todoCustomers, inProgressCustomers, doneCustomers, pendingMoney, collectedMoney, timestamp FROM ${constants.dotenv.parsed.table_users} WHERE supervisor=?`,
+					[supervisor],
+					(error, data) => {
+						return error
+							? reject({ code: 1002, message: "could not perform transaction" })
+							: resolve(
+									res.create(
+										data.length > 0
+											? "user fetched successfully"
+											: "user not found",
+										data.length > 0 ? data : null
+									)
+							);
+					}
+				);
+			} catch (error) {
+				return reject({ code: 1003, message: "could not perform transaction" });
+			}
+		});
+	},
+	register_user: async (content) => {
+		return new Promise((resolve, reject) => {
+			try {
+				// name - username - password - role - nationality - nationalID - branch - supervisor - userType 
+				if (!content.username || !content.password || !content.name || !content.role || 
+					!content.nationality || !content.nationalID || !content.branch || !content.supervisor 
+					|| !content.userType) {
+					return reject({ code: 400, message: "Request body invalid - missing fields" });
+				} else {
+					const passwordPromise = constants.hash(content.password);
+					const 	username = content.username,
+							name = content.name,
+							role = content.role,
+							nationality = content.nationality,
+							nationalID = content.nationalID,
+							branch = content.branch,
+							supervisor = content.supervisor,
+							userType = content.userType;
+					// Check if user exist
+					constants.sql.query(
+						`SELECT * FROM ${constants.dotenv.parsed.table_users} WHERE username=?`,
+						[username],
+						async (error, data) => {
+							if (data.length != 0) {
+								return reject({ code: 401, message: "Username exists" });
+							} else {
+								let password;
+								passwordPromise.then(res => {
+									password = res;
+								})
+								await passwordPromise;
+								constants.sql.query(
+									`INSERT INTO ${constants.dotenv.parsed.table_users} (username, nationalID, name, role, password, nationality, supervisor, branch, userType)  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+									[
+										username,
+										nationalID,
+										name,
+										role,
+										password,
+										nationality,
+										supervisor,
+										branch,
+										userType
+									],
+									(error, data) => {
+										return error
+											? reject({ code: 1005, message: error.code })
+											: resolve(
+													res.create("user added successfully", data.name)
+											);
+									}
+								);
+							}
+					});
+				}
+			} catch (error) {
+				return reject({ code: 2001, message: error.code });
+			}
+		});
+	},
 }
 
 // get_all_users: async () => {

@@ -15,6 +15,42 @@ module.exports = {
 			next();
 		}
 	},
+	get_a_user: async (request, response, next) => {
+		// get a user
+		try {
+			response.body = await m.get_a_user(request.params.username);
+			response.status(200).send(response.body);
+			next();
+		} catch (error) {
+			response.body = res.error(error);
+			response.status(500).send(response.body);
+			next();
+		}
+	},
+	get_supervisor_users: async (request, response, next) => {
+		// get supervisor users
+		try {
+			response.body = await m.get_supervisor_users(request.params.supervisor);
+			response.status(200).send(response.body);
+			next();
+		} catch (error) {
+			response.body = res.error(error);
+			response.status(500).send(response.body);
+			next();
+		}
+	},
+	register_user: async (request, response, next) => {
+		// register a user
+		try {
+			response.body = await m.register_user(request.body.content);
+			response.status(200).send(response.body);
+			next();
+		} catch (error) {
+			response.body = res.error(error);
+			response.status(500).send(response.body);
+			next();
+		}
+	},
 };
 
 // get_all_users: async (request, response, next) => {

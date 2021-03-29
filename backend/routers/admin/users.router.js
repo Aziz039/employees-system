@@ -4,6 +4,9 @@ const constants = require("../../core/app_constants"),
 
 router
 	.get("/", constants.verify_token, c.get_all_users) // get all users
+	.get("/:username", constants.verify_token, c.get_a_user) // get one user by username
+	.get("/supervisor/:supervisor", constants.verify_token, c.get_supervisor_users) // get all users by supervisor name
+	.post("/", constants.verify_token, c.register_user) // add user
 	
 
 module.exports = router;
