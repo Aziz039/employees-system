@@ -1,6 +1,6 @@
 export const BASE_URL = {
 	LOCAL: "http://localhost:2030/api/",
-	DEV: "",
+	DEV: "/api/",
 	PREPROD: "",
 	PROD: "",
 };
@@ -17,15 +17,49 @@ const APP_CONSTANTS = {
 			AUTH: {
 				LOGIN: environmentURL + "auth/login"
 			},
-			CMS: {
-				GET_ALL_CUSTOMERS: environmentURL + "cms/user_customers",
-				GET_CUSTOMER: environmentURL + "cms/user_customers/",
-				MODIFY_CUSTOMER: environmentURL + "cms/user_customers",
+			ADMIN: {
+				CMS: {
+					GET_ALL_CUSTOMERS: environmentURL + "admin/cms/customers",
+					GET_ALL_USER_CUSTOMERS: environmentURL + "admin/cms/customers/user/",
+					GET_USER_CUSTOMER: environmentURL + "admin/cms/customers/user/",
+					ADD_CUSTOMER: environmentURL + "admin/cms/customers",
+					MODIFY_CUSTOMER: environmentURL + "admin/cms/customers",
+					DELETE_CUSTOMER: environmentURL + "admin/cms/customers",
+					GET_CUSTOMERS_COUNT: environmentURL + "admin/cms/customers_count",
+					CUSTOMERS_BILL_COST: environmentURL + "admin/cms/customers_bill_cost",
+					USERS_COLLECTED_MONEY: environmentURL + "admin/cms/users_collected_money",
+					USERS_PENDING_MONEY: environmentURL + "admin/cms/users_pending_money",
+				},
+				USERS:{
+					GET_ALL_USERS: environmentURL + "admin/users",
+					GET_A_USER: environmentURL + "admin/users/",
+					GET_SUPERVISOR_USERS: environmentURL + "admin/users/supervisor/",
+					REGISTER_USER: environmentURL + "admin/users",
+					MODIFY_USER: environmentURL + "admin/users/",
+					DELETE_USER: environmentURL + "admin/users/",
+					MODIFY_PASS: environmentURL + "admin/users/change_pass/",
+				}
 			},
-			USERS:{
-				GET_ALL_USERS: environmentURL + "users",
-				GET_USER: environmentURL + "users",
-			}
+			EMPLOYEE: {
+				CMS: {
+					GET_ALL_CUSTOMERS: environmentURL + "user/cms/user_customers/",
+					GET_A_CUEOMER: environmentURL + "user/cms/user_customers/",
+					MODIFY_A_CUSTOMER: environmentURL + "user/cms/user_customers",
+					SEND_SMS: environmentURL + "user/cms/sms",
+				},
+				USERS:{
+					GET_USER: environmentURL + "user/users/",
+					MODIFY_USER: environmentURL + "user/users/",
+				}
+			},
+			SUPERVISOR: {
+				CMS: {
+
+				},
+				USERS:{
+
+				}
+			},
 		},
 		CONTENT_TYPE: "application/json",
 		LANGUAGE: {

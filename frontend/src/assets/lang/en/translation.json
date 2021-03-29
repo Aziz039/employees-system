@@ -85,6 +85,12 @@
     "adminDashboard": {
         "navbar-header-users": "Users",
         "navbar-header-customers": "Customers",
-        "navbar-header-dataManagement": "Data management"
+        "navbar-header-dataManagement": "Data management",
+        "DashboardTable-header-new-customers": "New customers:",
+        "DashboardTable-header-inprogress-customers": "In progress customers:",
+        "DashboardTable-header-complete-customers": "Completed customers:",
+        "DashboardTable-header-total-bills": "Total bills:",
+        "DashboardTable-header-collected-money": "Collected money:",
+        "DashboardTable-header-pending-money": "Pending money:"
     }
 }

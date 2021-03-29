@@ -4,10 +4,10 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import DashboardTable from './DashboardTable';
 
-import "../../../assets/styles/admin/adminDashboard.css"
+import "../../../../assets/styles/admin/adminDashboard.css"
 
-import i18n from '../../../core/i18n';
-import APP_CONSTANTS, {config} from "../../../core/app_constants";
+import i18n from '../../../../core/i18n';
+import APP_CONSTANTS, {config} from "../../../../core/app_constants";
 
 class Dashboard extends Component {
     constructor(props) {

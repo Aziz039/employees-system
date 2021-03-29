@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import "../../../assets/styles/admin/adminDashboard.css"
+import "../../../../assets/styles/admin/adminDashboard.css"
 
-import i18n from '../../../core/i18n';
-import APP_CONSTANTS, {config} from "../../../core/app_constants";
+import i18n from '../../../../core/i18n';
+import APP_CONSTANTS, {config} from "../../../../core/app_constants";
 
 class Sidebar extends Component {
     render() {

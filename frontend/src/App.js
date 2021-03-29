@@ -12,7 +12,7 @@ import Dashboard from "./components/pages/employee/EmployeeDashboard/Dashboard";
 import CustomerDetails from "./components/pages/employee/CustomerDetails/CustomerDetails";
 
 // admin pages
-import adminDashboard from "./components/pages/admin/Dashboard";
+import adminDashboard from "./components/pages/admin/Dashboard/Dashboard";
 
 // supervisor
 import supervisorDashboard from "./components/pages/supervisor/Dashboard"

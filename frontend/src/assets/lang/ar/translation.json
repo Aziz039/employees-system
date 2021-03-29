@@ -85,6 +85,12 @@
     "adminDashboard": {
         "navbar-header-users": "الموظفين",
         "navbar-header-customers": "العملاء",
-        "navbar-header-dataManagement": "إدارة البيانات"
+        "navbar-header-dataManagement": "إدارة البيانات",
+        "DashboardTable-header-new-customers": "العملاء الجدد:",
+        "DashboardTable-header-inprogress-customers": "العملاء تحت الاجراء:",
+        "DashboardTable-header-complete-customers": "العملاء المكتملين:",
+        "DashboardTable-header-total-bills": "مجموع الفواتير:",
+        "DashboardTable-header-collected-money": "الفواتير المستردة:",
+        "DashboardTable-header-pending-money": "الفواتير المعلقة:"
     }
 }
