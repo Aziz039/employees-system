@@ -289,6 +289,7 @@ module.exports = {
 				csv_file.mv(uploadPath, function(err) {
 					if (err)
 						return reject({ code: 1008, message: err });
+					helper_addToDB(uploadPath);
 					resolve(
 						res.create(`${today}${file_ext} File uploaded!`)
 					);
@@ -298,4 +299,39 @@ module.exports = {
 			}
 		});
 	},
+	get_all_files: async () => {
+		return new Promise((resolve, reject) => {
+			try {
+				constants.fs.readdir("./storage/csv", (error, files) => {
+					resolve(
+						res.create(
+							files.length > 0
+								? `Files were fetched successfully`
+								: `No files available`,
+							files.length > 0 ? files : null
+						)
+					);
+				});
+			} catch (error) {
+				return reject({ code: 1008, message: "could not perform transaction" });
+			}
+		});
+	},
+}
+
+const helper_addToDB = (file_path) => {
+	return new Promise((resolve, reject) => {
+		try {
+			constants.sql.query(
+				`LOAD DATA LOCAL INFILE "${file_path}" INTO TABLE ${constants.dotenv.parsed.table_customers} FIELDS TERMINATED BY \',\'  LINES TERMINATED BY '\n' IGNORE 1 ROWS SET timestamp = CURRENT_TIMESTAMP`,
+				(error, data) => {
+					return error
+						? console.log(error)
+						: console.log("data fetched");;
+				}
+			);
+		} catch (error) {
+			return console.log(error);
+		}
+	});
 }

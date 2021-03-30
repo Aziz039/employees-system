@@ -14,6 +14,7 @@ module.exports = {
 	bodyParser: require("body-parser"),
 	axios: require("axios"),
 	bcrypt: require("bcrypt"),
+	path: require('path'),
 	hash: async (key) => {
 		return new Promise((resolve, reject) => {
 			try {
