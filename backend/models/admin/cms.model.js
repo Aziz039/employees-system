@@ -1,5 +1,5 @@
-const { json } = require("body-parser");
-const constants = require("../../core/app_constants"),
+const { json } = require("body-parser"),
+	constants = require("../../core/app_constants"),
 	res = require("../../core/response");
 
 module.exports = {
@@ -272,6 +272,27 @@ module.exports = {
 							);
 					}
 				);
+			} catch (error) {
+				return reject({ code: 1008, message: "could not perform transaction" });
+			}
+		});
+	},
+	upload_csv: async (csv_file) => {
+		return new Promise((resolve, reject) => {
+			try {
+				let today  = new Date().toLocaleString("es-CL");
+				today = today.replace(":", "-");
+				today = today.replace(":", "-");
+				let file_ext = csv_file.name.slice(- 6);
+				file_ext = file_ext.substr(file_ext.indexOf("."));
+				let uploadPath = './storage/csv/' + today + file_ext;
+				csv_file.mv(uploadPath, function(err) {
+					if (err)
+						return reject({ code: 1008, message: err });
+					resolve(
+						res.create(`${today}${file_ext} File uploaded!`)
+					);
+				});
 			} catch (error) {
 				return reject({ code: 1008, message: "could not perform transaction" });
 			}

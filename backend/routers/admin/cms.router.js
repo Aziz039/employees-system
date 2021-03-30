@@ -13,6 +13,7 @@ router
 	.get("/customers_bill_cost", constants.verify_token, c.get_customers_billCostAfterDiscount) // get customers bills cost After Discount total
 	.get("/users_collected_money", constants.verify_token, c.get_collected_money) // get collected money total
 	.get("/users_pending_money", constants.verify_token, c.get_pending_money) // get pending money total
+	.post("/upload_csv", constants.verify_token, c.upload_csv); // uplaod csv file
 
 	
 

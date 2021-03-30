@@ -123,4 +123,22 @@ module.exports = {
 			next();
 		}
 	},
+	upload_csv: async (request, response, next) => {
+		// sum of total pending money
+		try {
+			if (!request.files || Object.keys(request.files).length === 0) {
+				response.body = res.error({message:'No files were uploaded', code: 400});
+				response.status(400).send(response.body);
+				next();
+			} else {
+				response.body = await m.upload_csv(request.files.csv_file);
+				response.status(200).send(response.body);
+				next();
+			}
+		} catch (error) {
+			response.body = res.error(error);
+			response.status(500).send(response.body);
+			next();
+		}
+	},
 };

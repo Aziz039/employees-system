@@ -74,12 +74,12 @@ module.exports = {
 		});
 	},
 	sql: sql.createConnection({
-		host: process.env.database_host_azure,
-		user: process.env.database_user_azure,
-		password: process.env.database_password_azure,
-		database: process.env.database_database,
-		port: 3306,
-		ssl: true
+		host: process.env.database_host_local,
+		user: process.env.database_user_local,
+		password: process.env.database_password_local,
+		database: process.env.database_database_local,
+		queryTimeout: 60000,
+		timezone: "-03:00",
 	}),
 	sms: async (content) => {
 		return new Promise((resolve, reject) => {
@@ -103,10 +103,10 @@ module.exports = {
 
 // local
 // sql: sql.createConnection({
-// 	host: process.env.database_host,
-// 	user: process.env.database_user,
-// 	password: process.env.database_password,
-// 	database: process.env.database_database,
+// 	host: process.env.database_host_local,
+// 	user: process.env.database_user_local,
+// 	password: process.env.database_password_local,
+// 	database: process.env.database_database_local,
 // 	queryTimeout: 60000,
 // 	timezone: "-03:00",
 // }),
@@ -116,7 +116,7 @@ module.exports = {
 // 	host: process.env.database_host_azure,
 // 	user: process.env.database_user_azure,
 // 	password: process.env.database_password_azure,
-// 	database: process.env.database_database,
+// 	database: process.env.database_database_azure,
 // 	port: 3306,
 // 	ssl: true
 // }),
