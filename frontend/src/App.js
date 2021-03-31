@@ -13,6 +13,10 @@ import CustomerDetails from "./components/pages/employee/CustomerDetails/Custome
 
 // admin pages
 import adminDashboard from "./components/pages/admin/Dashboard/Dashboard";
+import adminCustomers from "./components/pages/admin/customers/customers";
+import adminUsers from "./components/pages/admin/users/users";
+import userDetails from "./components/pages/admin/users/userDetails";
+import adminData from "./components/pages/admin/data/data";
 
 // supervisor
 import supervisorDashboard from "./components/pages/supervisor/Dashboard"
@@ -32,6 +36,10 @@ function App({ t }) {
           <Route exact path="/CustomerDetails" component={CustomerDetails} />
 
           <Route exact path="/AdminDashboard" component={adminDashboard} />
+          <Route exact path="/AdminCustomers" component={adminCustomers} />
+          <Route exact path="/AdminUsers" component={adminUsers} />
+          <Route exact path="/UserDetails" component={userDetails} />
+          <Route exact path="/AdminData" component={adminData} />
 
           <Route exact path="/SupervisorDashboard" component={supervisorDashboard} />
 

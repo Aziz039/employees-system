@@ -90,7 +90,25 @@
         "DashboardTable-header-inprogress-customers": "العملاء تحت الاجراء:",
         "DashboardTable-header-complete-customers": "العملاء المكتملين:",
         "DashboardTable-header-total-bills": "مجموع الفواتير:",
-        "DashboardTable-header-collected-money": "الفواتير المستردة:",
-        "DashboardTable-header-pending-money": "الفواتير المعلقة:"
+        "DashboardTable-header-collected-money": "الاموال المستردة:",
+        "DashboardTable-header-pending-money": "الاموال المعلقة:"
+    }, 
+    "adminUsers": {
+        "table-header-id": "عداد",
+        "table-header-username": "اسم المستخدم",
+        "table-header-nationalID": "رقم الهوية",
+        "table-header-name": "الاسم",
+        "table-header-role": "الدور",
+        "table-header-nationality": "الجنسية",
+        "table-header-supervisor": "المشرف",
+        "table-header-branch": "الفرع",
+        "table-header-userType": "نوع المستخدم",
+        "table-header-totalCustomersCount": "محموع العملاء",
+        "table-header-todoCustomers": "العملاء الجدد",
+        "table-header-inProgressCustomers": "العملاء تحت الاجراء",
+        "table-header-doneCustomers": "العملاء المكتملين",
+        "table-header-pendingMoney": "الاموال المعلقة",
+        "table-header-collectedMoney": "الاموال المستردة",
+        "table-header-timestamp": "وقت التسجيل"
     }
 }

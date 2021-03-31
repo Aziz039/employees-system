@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
-import Sidebar from '../shared/Sidebar';
-import DashboardTable from './DashboardTable';
-
-import "../../../../assets/styles/admin/adminDashboard.css"
 
 import i18n from '../../../../core/i18n';
 import APP_CONSTANTS, {config} from "../../../../core/app_constants";
+import axios from 'axios';
 
-class Dashboard extends Component {
+class userDetails extends Component {
     constructor(props) {
         super(props)
+    
         this.state = {
             isLogged: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged),
             Language: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.LANGUAGE),
             usename: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER),
-            role: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE)
+            role: sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE),
+            all_col: ''
         }
-        i18n.changeLanguage(this.state.Language);
     }
-    async componentDidMount() {
+
+    componentDidMount() {
         if (this.state.isLogged && this.state.role === "admin") {
             i18n.changeLanguage(this.state.Language);
             if (this.state.Language === "en") {
@@ -33,15 +30,33 @@ class Dashboard extends Component {
         } else {
             window.location.href = "/login";
         }
+        this.getData();
+    }
+    getData = async () => {
+        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.ADMIN.USERS.GET_A_USER}`;
+        // await axios.get(targetLink, config).then(
+        //   (res) => {
+        //       if (res.data.body) {
+        //         res.data.body.forEach((item, i) => {
+        //             item.id = i + 1;
+        //         });
+        //         this.setState({
+        //             ...this.state, // spreading in state for future proofing
+        //             isLoaded: true,
+        //             data: res.data
+        //         })
+        //       }
+        //     }
+        // ).catch(error => {console.log(error);});
     }
     render() {
         return (
-            <div className="container-fluid row d-flex">
-                <Sidebar />
-                <DashboardTable />
+            <div>
+                
             </div>
         );
     }
 }
 
-export default Dashboard;
+export 
+default userDetails;

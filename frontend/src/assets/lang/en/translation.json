@@ -92,5 +92,23 @@
         "DashboardTable-header-total-bills": "Total bills:",
         "DashboardTable-header-collected-money": "Collected money:",
         "DashboardTable-header-pending-money": "Pending money:"
+    }, 
+    "adminUsers": {
+        "table-header-id": "id",
+        "table-header-username": "Username",
+        "table-header-nationalID": "National ID",
+        "table-header-name": "Name",
+        "table-header-role": "Role",
+        "table-header-nationality": "Nationality",
+        "table-header-supervisor": "Supervisor",
+        "table-header-branch": "Branch",
+        "table-header-userType": "User type",
+        "table-header-totalCustomersCount": "Total customers",
+        "table-header-todoCustomers": "New customers",
+        "table-header-inProgressCustomers": "In progress customers",
+        "table-header-doneCustomers": "Complete customers",
+        "table-header-pendingMoney": "Pending money",
+        "table-header-collectedMoney": "Collected money",
+        "table-header-timestamp": "timestamp"
     }
 }

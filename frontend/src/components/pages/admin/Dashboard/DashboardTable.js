@@ -60,7 +60,7 @@ class DashboardTable extends Component {
     
     render() {
         return (
-            <div className="adminDashView">
+            <div className="adminDashView col-md-7">
                 <form className="customer-form">
                     <div className="row" >
                         <div className="col-md-4 customer-form-content">
