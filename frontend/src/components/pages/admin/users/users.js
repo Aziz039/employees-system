@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Sidebar from '../shared/Sidebar';
+
 import UsersView from './UsersView';
 // import "../../../../assets/styles/admin"
 
@@ -79,7 +79,6 @@ class users extends Component {
     render() {
         return (
             <div className="container-fluid row userView">
-                <Sidebar />
                 {   this.state.isLoaded ?
                        <UsersView data={this.state.data.body} cols={this.state.all_col}  />
                         : <p>No data to show!</p>

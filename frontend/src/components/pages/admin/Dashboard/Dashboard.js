@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Sidebar from '../shared/Sidebar';
 import DashboardTable from './DashboardTable';
 
 import "../../../../assets/styles/admin/adminDashboard.css"
@@ -37,7 +36,6 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="container-fluid row d-flex">
-                <Sidebar />
                 <DashboardTable />
             </div>
         );

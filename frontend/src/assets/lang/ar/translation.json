@@ -2,6 +2,9 @@
     "Header": {
         "Header-Nav-Logo": "الرائدون",
         "Header-Nav-Dashboard-Button": "لوحة التحكم الرئيسية ",
+        "Header-Nav-Admin-Users-Button": "الموظفين",
+        "Header-Nav-Admin-Customers-Button": "العملاء",
+        "Header-Nav-Admin-Data-Button": "البيانات",
         "Header-Nav-Language-Button": "اللغة",
         "Header-Nav-Logout-Button": "تسجيل الخروج",
         "Header-Nav-Login-Button": "تسجيل الدخول"
@@ -109,6 +112,8 @@
         "table-header-doneCustomers": "العملاء المكتملين",
         "table-header-pendingMoney": "الاموال المعلقة",
         "table-header-collectedMoney": "الاموال المستردة",
+        "table-header-password": "كلمة المرور",
+        "table-header-password-box": "حدد مربع الاختيار هذا لإعادة تعيين كلمة المرور",
         "table-header-timestamp": "وقت التسجيل"
     }
 }

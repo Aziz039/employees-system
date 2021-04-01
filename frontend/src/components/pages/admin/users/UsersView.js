@@ -36,12 +36,13 @@ export default function BasicToolbarFilteringGrid(test) {
                     columnBuffer={2}
                     onSelectionModelChange={(newSelection) => {
                         onclick= async () => {
-                            if (!newSelection.selectionModel) {
-                                newSelection.selectionModel = ""
-                            } else {
-                                sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.targetedUserId, newSelection.selectionModel);
+                            if (newSelection.selectionModel) {
+                                sessionStorage.setItem(APP_CONSTANTS.CONFIG.sessionStorage.targetedUsername, rows[newSelection.selectionModel - 1]["username"]);
                                 newSelection.selectionModel = ""
                                 window.location.href = "/UserDetails";
+                            } else {
+                                newSelection.selectionModel = ""
+                                //window.location.href = "/UserDetails";
                             }
                         }
                     }}

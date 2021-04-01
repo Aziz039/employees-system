@@ -57,7 +57,7 @@ class Header extends Component {
         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.isLogged);
         sessionStorage.removeItem(APP_CONSTANTS.CONFIG.sessionStorage.ROLE);
         window.location.href = "/Login";
-      }
+    }
     render() {
         return (
             <div>
@@ -83,8 +83,29 @@ class Header extends Component {
                                             <span className="sr-only">(current)</span>
                                         </Link >
                                 }
-                                
                             </li>
+                            {
+                                this.state.role === 'admin'? 
+                                    <li className="nav-item ">
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/AdminUsers">{this.state.t('Header.Header-Nav-Admin-Users-Button')}
+                                        </Link >
+                                    </li>:<span></span>
+                            }
+                            {
+                                this.state.role === 'admin'? 
+                                    <li className="nav-item ">
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/AdminCustomers">{this.state.t('Header.Header-Nav-Admin-Customers-Button')}
+                                        </Link >
+                                    </li>:<span></span>
+                            }
+                            {
+                                this.state.role === 'admin'? 
+                                    <li className="nav-item ">
+                                        <Link style={{ textDecoration: 'none' }} className="nav-link" to="/AdminData">{this.state.t('Header.Header-Nav-Admin-Data-Button')}
+                                            <span className="sr-only">(current)</span>
+                                        </Link >
+                                    </li>:<span></span>
+                            }
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" data-toggle="dropdown" to="#" role="button" aria-haspopup="true" aria-expanded="false">{this.state.t('Header.Header-Nav-Language-Button')}</Link>
                                 <div className="dropdown-menu">

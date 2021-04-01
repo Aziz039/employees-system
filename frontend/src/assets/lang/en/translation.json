@@ -2,6 +2,9 @@
     "Header": {
         "Header-Nav-Logo": "Alra2edoon",
         "Header-Nav-Dashboard-Button": "Dashboard",
+        "Header-Nav-Admin-Users-Button": "Users",
+        "Header-Nav-Admin-Customers-Button": "Customers",
+        "Header-Nav-Admin-Data-Button": "Data",
         "Header-Nav-Language-Button": "Language",
         "Header-Nav-Logout-Button": "Logout",
         "Header-Nav-Login-Button": "Login"
@@ -109,6 +112,8 @@
         "table-header-doneCustomers": "Complete customers",
         "table-header-pendingMoney": "Pending money",
         "table-header-collectedMoney": "Collected money",
+        "table-header-password": "password",
+        "table-header-password-box": "Check this box to reset the password",
         "table-header-timestamp": "timestamp"
     }
 }
