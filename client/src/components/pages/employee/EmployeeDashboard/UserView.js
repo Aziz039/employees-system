@@ -25,7 +25,7 @@ class UserView extends Component {
         }
     }
     getData = async () => {
-        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.USERS.GET_USER}/${sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER)}`;
+        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.EMPLOYEE.USERS.GET_USER}${sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER)}`;
         await axios.get(targetLink, config).then(
           (res) => 
                 this.setState({

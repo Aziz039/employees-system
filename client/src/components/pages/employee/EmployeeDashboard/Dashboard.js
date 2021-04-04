@@ -35,7 +35,7 @@ class Dashboard extends Component {
     }
     getData = async () => {
         this.getCols();
-        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.CMS.GET_ALL_CUSTOMERS}/${sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER)}`;
+        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.EMPLOYEE.CMS.GET_ALL_CUSTOMERS}${sessionStorage.getItem(APP_CONSTANTS.CONFIG.sessionStorage.USER)}`;
         await axios.get(targetLink, config).then(
           (res) => {
               if (res.data.body) {

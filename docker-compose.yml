@@ -1,0 +1,21 @@
+version: '1'
+
+services:
+  server:
+    env_file:
+        "./server/local.env"
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: "aziz039/employee-system-server"
+    ports:
+      - "5000:5000"
+  client:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    image: "aziz039/employee-system-client"
+    ports:
+      - "3000:3000"
+    links:
+      - "server"

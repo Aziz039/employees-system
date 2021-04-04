@@ -40,7 +40,7 @@ class CustomerDetails extends Component {
     }
 
     getData = async() => {
-        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.CMS.GET_CUSTOMER}${this.state.usename}/${this.state.targetedCustomer}`;
+        let targetLink = `${APP_CONSTANTS.CONFIG.APIs.EMPLOYEE.CMS.GET_A_CUEOMER}${this.state.usename}/${this.state.targetedCustomer}`;
         await axios.get(targetLink, config)
             .then((res) => this.setState({
                 ...this.state, 
